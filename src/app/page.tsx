@@ -97,14 +97,14 @@ export default function Home() {
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[10%] right-[5%]"></section>
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]"></section>
 
-      <nav className="flex justify-between items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
+      <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
         <a href="#" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
           <span className="absolute w-full h-2 bottom-[2px] left-0 bg-[rgba(52,152,219,0.2)] z-[-1]"></span>
         </a>
         
-        <menu className="hidden md:flex gap-2">
-          {['Home', 'sobre mi', 'Habilidades', 'Proyectos', 'Educación', 'Testimonios', 'Contacto'].map((item) => {
+        <menu className="hidden lg:flex gap-2">
+          {['Home', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
             const path = item.toLowerCase().replace(/\s+/g, '');
             const href = path === 'home' ? '/' : `/${path}`;
             
@@ -112,7 +112,7 @@ export default function Home() {
               <li key={item}>
                 <Link
                   href={href}
-                  className="text-[#34495e] no-underline font-medium transition-all duration-300 py-2 px-4 rounded-full bg-white/70 shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:text-white hover:bg-[#3498db] hover:-translate-y-[3px] hover:shadow-[0_5px_15px_rgba(52,152,219,0.3)]"
+                  className="text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 rounded-full bg-white/70 shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:text-white hover:bg-[#3498db] hover:-translate-y-[3px] hover:shadow-[0_5px_15px_rgba(52,152,219,0.3)]"
                 >
                   {item}
                 </Link>
@@ -122,7 +122,7 @@ export default function Home() {
         </menu>
         
         <button 
-          className="md:hidden text-[#34495e] text-2xl z-[110]"
+          className="lg:hidden text-[#34495e] text-2xl z-[110]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Menú"
         >
@@ -132,14 +132,14 @@ export default function Home() {
 
       {mobileMenuOpen && (
         <aside 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[105] transition-opacity duration-300"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[105] transition-opacity duration-300 lg:hidden"
           onClick={() => setMobileMenuOpen(false)}
         ></aside>
       )}
 
       <aside 
         ref={mobileMenuRef}
-        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg rounded-tl-4xl transform transition-transform duration-300 ease-in-out z-[110] ${
+        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg rounded-tl-4xl transform transition-transform duration-300 ease-in-out z-[110] lg:hidden ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -150,7 +150,7 @@ export default function Home() {
           </section>
           
           <ul className="space-y-4">
-            {['Home', 'sobre mi', 'Habilidades', 'Proyectos', 'Educación', 'Testimonios', 'Contacto'].map((item) => {
+            {['Home', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
               const path = item.toLowerCase().replace(/\s+/g, '');
               const href = path === 'home' ? '/' : `/${path}`;
               
@@ -158,7 +158,7 @@ export default function Home() {
                 <li key={item}>
                   <Link
                     href={href}
-                    className="block text-[#34495e] no-underline font-medium transition-all duration-300 py-2 px-4 pl-10 hover:bg-[#3498db]/10 hover:text-[#3498db]"
+                    className="block text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 pl-10 hover:bg-[#3498db]/10 hover:text-[#3498db]"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item}
@@ -255,7 +255,7 @@ export default function Home() {
         </article>
       </main>
 
-      <nav className="flex gap-5 justify-center md:absolute md:left-10 md:top-10/12 md:transform md:-translate-y-1/2 z-[2]">
+      <nav className="flex gap-5 ml-5 mt-10 md:top-10/12 md:transform md:-translate-y-1/2 z-[2]">
         <a 
           href="#" 
           title="GitHub"
