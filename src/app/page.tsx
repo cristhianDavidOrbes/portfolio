@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 export default function Home() {
   const [showVideo, setShowVideo] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [videoEnded, setVideoEnded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -39,7 +38,6 @@ export default function Home() {
   }, []);
 
   const handleWhoAmIClick = () => {
-    setIsAnimating(true);
     setVideoEnded(false);
     
     setTimeout(() => {
@@ -71,7 +69,6 @@ export default function Home() {
 
     const handleEnded = () => {
       setShowVideo(false);
-      setIsAnimating(false);
       setVideoEnded(true);
     };
 
@@ -233,6 +230,7 @@ export default function Home() {
                   controls={false}
                   preload="auto"
                   onContextMenu={(e) => e.preventDefault()}
+                  muted={isMuted}
                 >
                   <source src="/presentation-video.mp4" type="video/mp4" />
                   Tu navegador no soporta el elemento de video.
