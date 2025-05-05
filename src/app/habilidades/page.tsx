@@ -1,5 +1,5 @@
 "use client";
-import Image from 'next/image';
+
 import { useState, useRef, useEffect } from 'react';
 import Head from 'next/head';
 import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
