@@ -104,9 +104,9 @@ export default function Home() {
         </a>
         
         <menu className="hidden lg:flex gap-2">
-          {['Home', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
+          {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
             const path = item.toLowerCase().replace(/\s+/g, '');
-            const href = path === 'home' ? '/' : `/${path}`;
+            const href = path === 'casa' ? '/' : `/${path}`;
             
             return (
               <li key={item}>
@@ -150,9 +150,9 @@ export default function Home() {
           </section>
           
           <ul className="space-y-4">
-            {['Home', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
+            {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
               const path = item.toLowerCase().replace(/\s+/g, '');
-              const href = path === 'home' ? '/' : `/${path}`;
+              const href = path === 'casa' ? '/' : `/${path}`;
               
               return (
                 <li key={item}>
@@ -308,6 +308,8 @@ export default function Home() {
         .animation-direction-reverse {
           animation-direction: reverse;
         }
+        
+
       `}</style>
     </>
   );
