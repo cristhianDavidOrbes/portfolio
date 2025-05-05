@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -10,16 +9,10 @@ import Link from 'next/link';
 export default function Educacion() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isSticky, setIsSticky] = useState(false);
-  const [isMobileSticky, setIsMobileSticky] = useState(false);
-  const [showTitle, setShowTitle] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
-  const basketballRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setShowTitle(true);
-
     const handleClickOutside = (event: MouseEvent) => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
         setMobileMenuOpen(false);
@@ -28,14 +21,7 @@ export default function Educacion() {
 
     const handleScroll = () => {
       if (stickyRef.current) {
-        const rect = stickyRef.current.getBoundingClientRect();
-        setIsSticky(rect.top <= 100);
-      }
-
-      if (basketballRef.current && window.innerWidth < 768) {
-        const scrollPosition = window.scrollY;
-        const triggerPosition = 200;
-        setIsMobileSticky(scrollPosition > triggerPosition);
+        stickyRef.current.getBoundingClientRect();
       }
     };
 
@@ -43,7 +29,6 @@ export default function Educacion() {
     window.addEventListener('scroll', handleScroll);
     
     return () => {
-      setShowTitle(false);
       document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('scroll', handleScroll);
     };
@@ -68,7 +53,7 @@ export default function Educacion() {
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]"></section>
 
       {/* Navigation */}
-      <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
+      <nav ref={stickyRef} className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
         <Link href="/" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
           <span className="absolute w-full h-2 bottom-[2px] left-0 bg-[rgba(52,152,219,0.2)] z-[-1]"></span>

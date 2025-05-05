@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Head from 'next/head';
 import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
@@ -10,44 +10,10 @@ import { usePathname } from 'next/navigation';
 export default function Habilidades() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isSticky, setIsSticky] = useState(false);
-  const [isMobileSticky, setIsMobileSticky] = useState(false);
-  const [showTitle, setShowTitle] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
-  const basketballRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setShowTitle(true);
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
-        setMobileMenuOpen(false);
-      }
-    };
 
-    const handleScroll = () => {
-      if (stickyRef.current) {
-        const rect = stickyRef.current.getBoundingClientRect();
-        setIsSticky(rect.top <= 100);
-      }
-
-      if (basketballRef.current && window.innerWidth < 768) {
-        const scrollPosition = window.scrollY;
-        const triggerPosition = 200;
-        setIsMobileSticky(scrollPosition > triggerPosition);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      setShowTitle(false);
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <>
