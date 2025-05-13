@@ -11,6 +11,96 @@ export default function Educacion() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
+  const timelineContainerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const educationData = [
+    {
+      year: "2018",
+      title: "INTRODUCCIÓN A LA PROGRAMACIÓN",
+      decorationColor: "#FBDFDF",
+      institution: "Universidad Tecnológica",
+      description: "Curso introductorio a los conceptos básicos de programación y algoritmos."
+    },
+    {
+      year: "2019",
+      title: "DESARROLLO WEB BÁSICO",
+      decorationColor: "#D8FFFA",
+      institution: "Academia Digital",
+      description: "Fundamentos de HTML, CSS y JavaScript para desarrollo de sitios web estáticos."
+    },
+    {
+      year: "2020",
+      title: "HERRAMIENTAS AVANZADAS DE HOJA DE CALCULO",
+      decorationColor: "#9CF9FC",
+      institution: "SENA",
+      description: "Curso orientado al dominio de funciones complejas en hojas de cálculo. Se abordaron temas como tablas dinámicas y aplicación de herramientas para el análisis y la visualización de datos."
+    },
+    {
+      year: "2020",
+      title: "DISEÑO DE INTERFACES DE USUARIO",
+      decorationColor: "#BBF0FF",
+      institution: "Instituto de Diseño",
+      description: "Principios de diseño UI/UX y herramientas modernas para creación de interfaces."
+    },
+    {
+      year: "2021",
+      title: "DESARROLLO FRONTEND AVANZADO",
+      decorationColor: "#BBF0FF",
+      institution: "Escuela de Código",
+      description: "Profundización en frameworks modernos como React y Vue.js para desarrollo frontend."
+    },
+    {
+      year: "2021",
+      title: "BACKEND CON NODE.JS",
+      decorationColor: "#BBF0FF",
+      institution: "Academia de Programación",
+      description: "Creación de APIs RESTful y servicios backend utilizando Node.js y Express."
+    },
+    {
+      year: "2022",
+      title: "TÉCNICO EN DISEÑO E INTEGRACION DE MULTIMEDIA",
+      decorationColor: "#BBF0FF",
+      institution: "SENA",
+      description: "Formación técnica en herramientas de diseño gráfico, animación y producción digital. Desarrollo de proyectos multimedia interactivos utilizando software especializado."
+    },
+    {
+      year: "2022",
+      title: "BACHILLER",
+      decorationColor: "#BBF0FF",
+      institution: "Institución Educativa",
+      description: "Culminación en media. Fortalezas básicas y orientación en actividades."
+    },
+    {
+      year: "2023",
+      title: "INGENIERÍA DE SOFTWARE",
+      decorationColor: "#BBF0FF",
+      institution: "Universidad Nacional",
+      description: "Formación en principios de ingeniería de software, arquitectura de sistemas y desarrollo ágil."
+    },
+    {
+      year: "2023",
+      title: "CLOUD COMPUTING",
+      decorationColor: "#BBF0FF",
+      institution: "Plataforma de Cursos Online",
+      description: "Certificación en servicios en la nube con AWS y despliegue de aplicaciones escalables."
+    }
+  ];
+
+  useEffect(() => {
+    const container = timelineContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const scrollWidth = container.scrollWidth - container.clientWidth;
+      const currentScroll = container.scrollLeft;
+      const progress = (currentScroll / scrollWidth) * 100;
+      setScrollProgress(progress);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -154,6 +244,84 @@ export default function Educacion() {
             <h1 className="ml-6 mt-2 text-2xl text-[#0A1B58]">Educación</h1>
           </motion.section>
         </AnimatePresence>
+
+        {/* Sección de línea de tiempo */}
+        <section className="pt-32 pb-16 px-0 max-w-full">
+          {/* Versión Desktop - Horizontal (sin cambios) */}
+          <div className="hidden lg:block">
+            <div className="relative h-[500px] w-full overflow-hidden">
+              <div className="absolute left-0 right-0 top-[30%] h-1 bg-gray-300 z-0">
+                <div 
+                  className="h-full bg-[#48E7FF] transition-all duration-300"
+                  style={{ width: `${scrollProgress}%` }}
+                />
+              </div>
+
+              <div
+                ref={timelineContainerRef}
+                className="absolute top-0 left-0 right-0 h-full overflow-x-auto overflow-y-hidden pb-12 px-4"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                <div className="inline-flex items-center h-full space-x-8">
+                  <div className="inline-block h-full w-[calc(50vw-240px)]" />
+                  
+                  {educationData.map((item, index) => (
+                    <div
+                      key={index}
+                      className="inline-block w-96 h-64 relative"
+                    >
+                      <motion.div
+                        whileHover={{ y: -10 }}
+                        className="bg-white rounded-xl shadow-lg p-6 h-full flex flex-col cursor-pointer relative z-20"
+                        style={{ backgroundColor: item.decorationColor }}
+                      >
+                        <span className="text-lg w-20 text-center bg-white rounded-full font-bold text-[#2c3e50] mb-2">{item.year}</span>
+                        <h3 className="text-xl font-bold text-[#2c3e50] mb-2">{item.title}</h3>
+                        <p className="text-sm text-gray-500 mb-3">{item.institution}</p>
+                        <p className="text-sm text-gray-700 flex-grow">{item.description}</p>
+                      </motion.div>
+                    </div>
+                  ))}
+                  
+                  <div className="inline-block h-full w-[calc(50vw-240px)]" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Versión Móvil - Vertical */}
+          <div className="lg:hidden">
+            <div className="relative flex justify-center">
+              {/* Línea de tiempo vertical (centrada pero desplazada a la izquierda) */}
+              <div className="absolute left-[calc(50%-80px)] top-0 h-full w-1 bg-gray-300 z-0">
+                <div 
+                  className="w-full bg-[#48E7FF] transition-all duration-300"
+                  style={{ height: `${scrollProgress}%` }}
+                />
+              </div>
+
+              {/* Contenedor de tarjetas vertical (centrado) */}
+              <div className="relative w-70 z-10 space-y-8  sm:w-full px-4">
+                {educationData.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={{ x: 5 }}
+                    className="bg-white rounded-xl shadow-lg p-6 cursor-pointer transition-all duration-300 mx-auto"
+                    style={{ 
+                      backgroundColor: item.decorationColor,
+                      width: '100%' // Tamaño de las cards en móvil (ocuparán el ancho disponible menos el padding)
+                    }}
+                  >
+                    <span className="text-lg w-20 text-center bg-white rounded-full font-bold text-[#2c3e50] mb-2">{item.year}</span>
+                    <h3 className="text-xl font-bold text-[#2c3e50] mb-2">{item.title}</h3>
+                    <p className="text-sm text-gray-500 mb-3">{item.institution}</p>
+                    <p className="text-sm text-gray-700">{item.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Fixed social media icons at bottom center */}
@@ -161,7 +329,7 @@ export default function Educacion() {
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="fixed bottom-4 left-1/2 md:left-30 transform -translate-x-1/2 flex gap-5 z-[2]"
+        className="fixed bottom-4 left-1/2 md:left-30 transform -translate-x-1/2 flex gap-5 z-[100]"
       >
         <motion.a 
           whileHover={{ y: -5, rotate: 5 }}
@@ -217,6 +385,11 @@ export default function Educacion() {
         
         .animation-direction-reverse {
           animation-direction: reverse;
+        }
+        
+        /* Ocultar scrollbar pero mantener funcionalidad */
+        .overflow-x-auto::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </>

@@ -1,44 +1,28 @@
 "use client";
-import { useState, useRef, useEffect } from 'react';
+
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Head from 'next/head';
-import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
+import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes, FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa';
 import Link from 'next/link';
 
 export default function Contacto() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    const handleScroll = () => {
-      if (stickyRef.current) {
-        stickyRef.current.getBoundingClientRect();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const redesSociales = [
+    { icon: <FaGithub className="text-2xl" />, nombre: "GitHub", url: "#" },
+    { icon: <FaFacebookF className="text-2xl" />, nombre: "Facebook", url: "#" },
+    { icon: <FaWhatsapp className="text-2xl" />, nombre: "WhatsApp", url: "#" }
+  ];
 
   return (
     <>
       <Head>
         <title>Cristhian David - Contacto</title>
-        <meta name="description" content="Información de contacto de Cristhian David, Ingeniero de Software" />
+        <meta name="description" content="Información de contacto de Cristhian David" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -53,7 +37,7 @@ export default function Contacto() {
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]"></section>
 
       {/* Navigation */}
-      <nav ref={stickyRef} className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
+      <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
         <Link href="/" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
           <span className="absolute w-full h-2 bottom-[2px] left-0 bg-[rgba(52,152,219,0.2)] z-[-1]"></span>
@@ -154,6 +138,85 @@ export default function Contacto() {
             <h1 className="ml-6 mt-2 text-2xl text-[#0A1B58]">Contacto</h1>
           </motion.section>
         </AnimatePresence>
+
+        {/* Sección de Contacto */}
+        <section className="pt-32 pb-16 px-4 md:px-8 lg:px-16">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Columna izquierda - Contacto social + Mapa */}
+            <div className="space-y-8">
+              {/* Contacto social */}
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-[#2c3e50] mb-6">Conectemos</h2>
+                <div className="flex flex-wrap gap-6 justify-center">
+                  {redesSociales.map((red, index) => (
+                    <motion.a
+                      key={index}
+                      whileHover={{ scale: 1.1 }}
+                      href={red.url}
+                      className="w-16 h-16 rounded-full bg-[#3498db] text-white flex flex-col items-center justify-center shadow-md"
+                    >
+                      {red.icon}
+                      <span className="text-xs mt-1">{red.nombre}</span>
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mapa */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="bg-white rounded-xl shadow-lg overflow-hidden"
+              >
+                <div className="h-64 md:h-80 w-full">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.800708234131!2d-77.28183792571147!3d1.208746398719251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e2ed3e8a0e5a9a5%3A0x3a95a7c8d8d8d8d8!2sPasto%2C%20Nari%C3%B1o!5e0!3m2!1ses!2sco!4v1620000000000!5m2!1ses!2sco"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    title="Mapa de Pasto, Nariño"
+                  ></iframe>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Columna derecha - Información de contacto */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white rounded-xl shadow-lg p-8 h-fit"
+            >
+              <h2 className="text-2xl font-bold text-[#2c3e50] mb-8">Información de contacto</h2>
+              <ul className="space-y-6">
+                <li className="flex items-start">
+                  <FaMapMarkerAlt className="text-[#3498db] text-xl mt-1 mr-4" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-[#34495e]">Dirección</h3>
+                    <p className="text-gray-700">Torres de Mariluz Etapa 1</p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <FaEnvelope className="text-[#3498db] text-xl mt-1 mr-4" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-[#34495e]">Email</h3>
+                    <p className="text-gray-700">cristiandavidl1232@gmail.com</p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <FaPhone className="text-[#3498db] text-xl mt-1 mr-4" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-[#34495e]">Teléfono</h3>
+                    <p className="text-gray-700">+57 302 751 5644</p>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </section>
       </main>
 
       {/* Fixed social media icons at bottom center */}

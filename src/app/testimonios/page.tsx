@@ -6,14 +6,36 @@ import { usePathname } from 'next/navigation';
 import Head from 'next/head';
 import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Testimonios() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
+  const testimonios = [
+    {
+      nombre: "Juan Pérez",
+      opinion: "Cristhian es un profesional excepcional. Su trabajo en nuestro proyecto fue impecable y siempre entregó más de lo esperado.",
+      imagen: "/testimonio1.jpg" // Reemplaza con tus imágenes reales
+    },
+    {
+      nombre: "María González",
+      opinion: "Trabajar con Cristhian fue una experiencia increíble. Su atención al detalle y conocimientos técnicos son sobresalientes.",
+      imagen: "/testimonio2.jpg"
+    },
+    {
+      nombre: "Carlos Rodríguez",
+      opinion: "Recomiendo totalmente a Cristhian. Su capacidad para resolver problemas complejos y su profesionalismo son dignos de admiración.",
+      imagen: "/testimonio3.jpg"
+    }
+  ];
 
-
+  const formas = [
+    "rounded-[53%_47%_52%_48%_/_36%_41%_59%_64%]",
+    "rounded-[30%_70%_70%_30%_/_30%_52%_48%_70%]",
+    "rounded-[60%_40%_30%_70%_/_60%_30%_70%_40%]"
+  ];
 
   return (
     <>
@@ -135,6 +157,47 @@ export default function Testimonios() {
             <h1 className="ml-6 mt-2 text-2xl text-[#0A1B58]">Testimonios</h1>
           </motion.section>
         </AnimatePresence>
+
+        {/* Sección de Testimonios */}
+        <section className="pt-32 pb-16 px-4 md:px-8 lg:px-16">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {testimonios.map((testimonio, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="flex flex-col items-center"
+                >
+                  {/* Contenedor de forma irregular con imagen */}
+                  <div className={`w-64 h-64 ${formas[index]} bg-gradient-to-br from-[rgb(255,255,255)] to-[rgb(255,255,255)] relative overflow-hidden shadow-lg mb-6 animate-float`}
+                       style={{ animationDuration: `${8 + index * 2}s` }}>
+                    <div className="absolute inset-0 flex items-center justify-center p-2">
+                      <div className="relative w-full h-full">
+                        <Image 
+                          src={testimonio.imagen} 
+                          alt={testimonio.nombre}
+                          fill
+                          className="object-cover rounded-inherit"
+                          style={{
+                            borderRadius: 'inherit'
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Texto del testimonio */}
+                  <div className="text-center max-w-xs">
+                    <h3 className="text-xl font-bold text-[#2c3e50] mb-2">{testimonio.nombre}</h3>
+                    <p className="text-gray-700 italic">"{testimonio.opinion}"</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Fixed social media icons at bottom center */}

@@ -1,19 +1,131 @@
 "use client";
 
-import { useState, useRef} from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Head from 'next/head';
-import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
+import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes, FaChevronLeft, FaChevronRight, FaCode } from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Proyectos() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
+  // Proyectos con imágenes y enlaces a GitHub
+  const projects = [
+    {
+      id: 1,
+      title: "Reproductor de Música",
+      img: "/reproductor_musica.png",
+      description: "Una aplicación que te permite escuchar música de tu preferencia con una interfaz intuitiva y personalizable.",
+      lines: [
+        "Reproductor de música personalizable",
+        "Interfaz intuitiva y fácil de usar",
+        "Funciones avanzadas de reproducción"
+      ],
+      githubUrl: "https://github.com/tuusuario/reproductor-musica"
+    },
+    {
+      id: 2,
+      title: "Sistema de Reservas",
+      img: "/turismo.png",
+      description: "Plataforma web para reservar sitios y lugares donde puedes ir a disfrutar de tus actividades favoritas.",
+      lines: [
+        "Sistema completo de reservas online",
+        "Gestión de disponibilidad en tiempo real",
+        "Panel de administración integrado"
+      ],
+      githubUrl: "https://github.com/tuusuario/sistema-reservas"
+    },
+    {
+      id: 3,
+      title: "Reloj con Alarma",
+      img: "/reloj.png",
+      description: "Aplicación de reloj con funciones de alarma y temporizador, perfecta para organizar tu día.",
+      lines: [
+        "Reloj digital con múltiples caras",
+        "Sistema de alarmas programables",
+        "Temporizador y cronómetro"
+      ],
+      githubUrl: "https://github.com/tuusuario/reloj-alarma"
+    },
+    {
+      id: 4,
+      title: "Coaligo",
+      img: "/coaligo.png",
+      description: "Plataforma colaborativa para desarrolladores que buscan compartir y mejorar su código.",
+      lines: [
+        "Editor de código colaborativo",
+        "Sistema de versionamiento integrado",
+        "Compartir fragmentos de código"
+      ],
+      githubUrl: "https://github.com/tuusuario/coaligo"
+    },
+    {
+      id: 5,
+      title: "Gestor de Tareas",
+      img: "/gestor-tareas.png",
+      description: "Organiza tus actividades diarias con este práctico gestor de tareas con recordatorios.",
+      lines: [
+        "Organización por categorías y prioridades",
+        "Recordatorios y notificaciones",
+        "Sincronización multiplataforma"
+      ],
+      githubUrl: "https://github.com/tuusuario/gestor-tareas"
+    },
+    {
+      id: 6,
+      title: "Clima App",
+      img: "/clima-app.png",
+      description: "Aplicación del clima que muestra pronósticos precisos para tu ubicación actual.",
+      lines: [
+        "Pronóstico del tiempo en tiempo real",
+        "Ubicación automática o manual",
+        "Gráficos y predicciones extendidas"
+      ],
+      githubUrl: "https://github.com/tuusuario/clima-app"
+    }
+  ];
 
+  const nextProject = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === projects.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
+  const prevProject = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? projects.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 100) {
+      nextProject();
+    }
+
+    if (touchStart - touchEnd < -100) {
+      prevProject();
+    }
+  };
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, []);
 
   return (
     <>
@@ -135,6 +247,117 @@ export default function Proyectos() {
             <h1 className="ml-6 mt-2 text-2xl text-[#0A1B58]">Proyectos</h1>
           </motion.section>
         </AnimatePresence>
+
+        {/* Carrusel de Proyectos */}
+        <section className="pt-32 pb-16 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-7xl mx-auto">
+          <div className="relative w-full h-[600px] overflow-hidden">
+            {/* Botones de navegación */}
+            <button 
+              onClick={prevProject}
+              className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#3498db] hover:text-white transition-colors duration-300"
+              aria-label="Proyecto anterior"
+            >
+              <FaChevronLeft />
+            </button>
+            
+            <button 
+              onClick={nextProject}
+              className="hidden sm:block absolute right-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#3498db] hover:text-white transition-colors duration-300"
+              aria-label="Siguiente proyecto"
+            >
+              <FaChevronRight />
+            </button>
+
+            {/* Contenedor de proyectos */}
+            <div 
+              ref={projectsRef}
+              className="relative w-full h-full flex items-center"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <AnimatePresence>
+                {projects.map((project, index) => {
+                  const position = ((index - currentIndex + projects.length) % projects.length) - 1;
+                  
+                  if (Math.abs(position) > 1) return null;
+
+                  return (
+                    <motion.div
+                      key={project.id}
+                      initial={{ x: position * 300, opacity: 0, scale: 0.8 }}
+                      animate={{ 
+                        x: position * 200, 
+                        opacity: position === 0 ? 1 : 0.6, 
+                        scale: position === 0 ? 1 : 0.9,
+                        filter: position === 0 ? 'blur(0px)' : 'blur(2px)'
+                      }}
+                      exit={{ x: position * 300, opacity: 0, scale: 0.8 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      className={`absolute w-full max-w-md mx-auto left-0 right-0 ${
+                        position === 0 ? 'z-10' : 'z-0'
+                      }`}
+                    >
+                      <div className="bg-white rounded-xl shadow-xl overflow-hidden mx-4 transform transition-all duration-300">
+                        {/* Contenedor de imagen modificado */}
+                        <div className="relative h-48 w-full flex items-center justify-center bg-gray-100">
+                          <Image 
+                            src={project.img} 
+                            alt={project.title}
+                            width={300}
+                            height={200}
+                            className="object-contain max-h-full max-w-full p-4"
+                          />
+                        </div>
+                        
+                        <div className="p-6">
+                          <h3 className="text-2xl font-bold text-[#2c3e50] mb-4 text-center">
+                            {project.title}
+                          </h3>
+                          <div className="text-[#34495e] mb-6 text-center">
+                            {project.lines.map((line, i) => (
+                              <p key={i} className="mb-2">{line}</p>
+                            ))}
+                          </div>
+                          <p className="text-sm text-gray-500 text-center mb-4">
+                            {project.description}
+                          </p>
+                          
+                          {/* Botón de GitHub */}
+                          <div className="flex justify-center">
+                            <a 
+                              href={project.githubUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 px-4 py-2 bg-[#2c3e50] text-white rounded-lg hover:bg-[#3498db] transition-colors duration-300"
+                            >
+                              <FaCode />
+                              Ver código en GitHub
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+
+            {/* Indicadores de posición */}
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentIndex ? 'bg-[#3498db] w-6' : 'bg-gray-300'
+                  }`}
+                  aria-label={`Ir al proyecto ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Fixed social media icons at bottom center */}

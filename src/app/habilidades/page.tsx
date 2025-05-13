@@ -7,13 +7,73 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
+interface SkillCardProps {
+  title: string;
+  description: string;
+  icon: string;
+  decorationColor?: string;
+}
+
+const SkillCard: React.FC<SkillCardProps> = ({ 
+  title, 
+  description, 
+  icon, 
+  decorationColor = "#90CAF9"
+}) => {
+  return (
+    <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden relative flex flex-col w-70 h-120">
+      {/* Decorative element - background blob with customizable color */}
+      <div 
+        className="absolute top-0 right-0 w-32 h-32 rounded-bl-[100px] -z-0 opacity-70" 
+        style={{
+          backgroundColor: decorationColor
+        }}
+      />
+      
+      <div className="relative z-10 flex-1 flex flex-col">
+        <div className="mb-4 flex justify-center">
+          <img 
+            src={icon} 
+            alt={title} 
+            className="w-32 h-32 object-contain"
+          />
+        </div>
+        <h3 className="text-xl font-bold text-[#2c3e50] mb-3 text-center">
+          {title}
+        </h3>
+        <p className="text-[#34495e] mb-4 text-center flex-1">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+};
+
 export default function Habilidades() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-
-
+  const skills = [
+    {
+      title: "Desarrollo Frontend",
+      description: "Experiencia en HTML, CSS, JavaScript, TypeScript, Tailwind CSS y Next.js para crear interfaces modernas y funcionales.",
+      icon: "/computador.png",
+      decorationColor: "#BBF0FF"
+    },
+    {
+      title: "Lenguajes de Programación",
+      description: "Conocimientos en Python, Java, C y Arduino. Actualmente aprendiendo C++ para fortalecer mi lógica de programación.",
+      icon: "arduino.png",
+      decorationColor: "#94D1FF"
+    },
+    {
+      title: "Habilidades Complementarias",
+      description: "Habilidad en resolución de problemas, trabajo en equipo y uso de herramientas como Git y GitHub para gestión de proyectos.",
+      icon: "compresion.png",
+      decorationColor: "#78FBEB"
+    }
+  ];
 
   return (
     <>
@@ -135,6 +195,30 @@ export default function Habilidades() {
             <h1 className="ml-6 mt-2 text-2xl text-[#0A1B58]">Habilidades</h1>
           </motion.section>
         </AnimatePresence>
+
+        {/* Skills Cards Section */}
+        <section className="pt-32 pb-16 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-7xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 justify-items-center"
+          >
+            {skills.map((skill, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ y: -10 }}
+              >
+                <SkillCard
+                  title={skill.title}
+                  description={skill.description}
+                  icon={skill.icon}
+                  decorationColor={skill.decorationColor}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
       </main>
 
       {/* Fixed social media icons at bottom center */}
@@ -142,7 +226,7 @@ export default function Habilidades() {
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="fixed bottom-4 left-1/2 md:left-30 transform -translate-x-1/2 flex gap-5 z-[2]"
+        className="fixed bottom-4 left-1/2 md:left-30 transform -translate-x-1/2 flex gap-5 z-[100]"
       >
         <motion.a 
           whileHover={{ y: -5, rotate: 5 }}
