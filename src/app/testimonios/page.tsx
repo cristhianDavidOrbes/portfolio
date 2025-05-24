@@ -17,7 +17,7 @@ export default function Testimonios() {
     {
       nombre: "Juan Pérez",
       opinion: "Cristhian es un profesional excepcional. Su trabajo en nuestro proyecto fue impecable y siempre entregó más de lo esperado.",
-      imagen: "/testimonio1.jpg" // Reemplaza con tus imágenes reales
+      imagen: "/testimonio1.jpg"
     },
     {
       nombre: "María González",
@@ -183,6 +183,9 @@ export default function Testimonios() {
                           style={{
                             borderRadius: 'inherit'
                           }}
+                          // Añade placeholder para imágenes
+                          placeholder="blur"
+                          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZWVlZWVlIi8+PC9zdmc+"
                         />
                       </div>
                     </div>
@@ -235,34 +238,6 @@ export default function Testimonios() {
           <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0"></span>
         </motion.a>
       </motion.nav>
-
-      <style jsx global>{`
-        @keyframes float {
-          0% { transform: translateY(0) rotate(0); }
-          50% { transform: translateY(-20px) rotate(5deg); }
-          100% { transform: translateY(0) rotate(0); }
-        }
-        
-        .animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-        
-        .animation-duration-10s {
-          animation-duration: 10s;
-        }
-        
-        .animation-duration-12s {
-          animation-duration: 12s;
-        }
-        
-        .animation-duration-6s {
-          animation-duration: 6s;
-        }
-        
-        .animation-direction-reverse {
-          animation-direction: reverse;
-        }
-      `}</style>
     </>
   );
 }
