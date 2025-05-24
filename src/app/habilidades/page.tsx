@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Head from 'next/head';
-import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -38,6 +38,8 @@ const SkillCard: React.FC<SkillCardProps> = ({
             height={128}
             className="w-32 h-32 object-contain"
             priority
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZWVlZWVlIi8+PC9zdmc+"
           />
         </div>
         <h3 className="text-xl font-bold text-[#2c3e50] mb-3 text-center">
@@ -52,7 +54,6 @@ const SkillCard: React.FC<SkillCardProps> = ({
 };
 
 export default function Habilidades() {
-  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -244,18 +245,6 @@ export default function Habilidades() {
           </motion.a>
         ))}
       </motion.nav>
-
-      <style jsx global>{`
-        @keyframes float {
-          0% { transform: translateY(0) rotate(0); }
-          50% { transform: translateY(-20px) rotate(5deg); }
-          100% { transform: translateY(0) rotate(0); }
-        }
-        
-        .animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-      `}</style>
     </>
   );
 }

@@ -4,12 +4,11 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Head from 'next/head';
-import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Testimonios() {
-  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -47,19 +46,19 @@ export default function Testimonios() {
       </Head>
 
       {/* Background elements */}
-      <section className="fixed inset-0 bg-gradient-to-br from-[#EBF8FF] to-[#e6f7ff] z-[-2]"></section>
-      <section className="fixed w-[300px] h-[300px] rounded-[53%_47%_52%_48%_/_36%_41%_59%_64%] bg-gradient-to-br from-[rgba(52,152,219,0.3)] to-[rgba(41,128,185,0.1)] top-[-50px] right-[-100px] animate-float z-[-1]"></section>
-      <section className="fixed w-[200px] h-[200px] rounded-[30%_70%_70%_30%_/_30%_52%_48%_70%] bg-gradient-to-tr from-[rgba(41,128,185,0.2)] to-[rgba(52,152,219,0.05)] bottom-[50px] left-[-50px] animate-float animation-direction-reverse animation-duration-10s z-[-1]"></section>
-      <section className="fixed w-[150px] h-[150px] rounded-[60%_40%_30%_70%_/_60%_30%_70%_40%] bg-gradient-to-br from-[rgba(46,204,113,0.2)] to-[rgba(39,174,96,0.05)] top-[40%] left-[20%] animate-float animation-duration-12s z-[-1]"></section>
-      <section className="fixed w-[100px] h-[100px] rounded-full bg-gradient-to-br from-[rgba(231,76,60,0.15)] to-[rgba(192,57,43,0.05)] top-[30%] right-[20%] animate-float animation-duration-6s z-[-1]"></section>
-      <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[10%] right-[5%]"></section>
-      <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]"></section>
+      <section className="fixed inset-0 bg-gradient-to-br from-[#EBF8FF] to-[#e6f7ff] z-[-2]" />
+      <section className="fixed w-[300px] h-[300px] rounded-[53%_47%_52%_48%_/_36%_41%_59%_64%] bg-gradient-to-br from-[rgba(52,152,219,0.3)] to-[rgba(41,128,185,0.1)] top-[-50px] right-[-100px] animate-float z-[-1]" />
+      <section className="fixed w-[200px] h-[200px] rounded-[30%_70%_70%_30%_/_30%_52%_48%_70%] bg-gradient-to-tr from-[rgba(41,128,185,0.2)] to-[rgba(52,152,219,0.05)] bottom-[50px] left-[-50px] animate-float animation-direction-reverse animation-duration-10s z-[-1]" />
+      <section className="fixed w-[150px] h-[150px] rounded-[60%_40%_30%_70%_/_60%_30%_70%_40%] bg-gradient-to-br from-[rgba(46,204,113,0.2)] to-[rgba(39,174,96,0.05)] top-[40%] left-[20%] animate-float animation-duration-12s z-[-1]" />
+      <section className="fixed w-[100px] h-[100px] rounded-full bg-gradient-to-br from-[rgba(231,76,60,0.15)] to-[rgba(192,57,43,0.05)] top-[30%] right-[20%] animate-float animation-duration-6s z-[-1]" />
+      <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[10%] right-[5%]" />
+      <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]" />
 
       {/* Navigation */}
       <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
         <Link href="/" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
-          <span className="absolute w-full h-2 bottom-[2px] left-0 bg-[rgba(52,152,219,0.2)] z-[-1]"></span>
+          <span className="absolute w-full h-2 bottom-[2px] left-0 bg-[rgba(52,152,219,0.2)] z-[-1]" />
         </Link>
         
         <menu className="hidden lg:flex gap-2">
@@ -83,7 +82,7 @@ export default function Testimonios() {
         <button 
           className="lg:hidden text-[#34495e] text-2xl z-[110]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Menú"
+          aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
         >
           {mobileMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
@@ -109,7 +108,7 @@ export default function Testimonios() {
               className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg rounded-tl-4xl z-[110] lg:hidden"
             >
               <section className="pt-10 relative">
-                <menu className="w-64 bg-gray-200 h-0.5 absolute top-20"></menu>
+                <div className="w-64 bg-gray-200 h-0.5 absolute top-20" />
                 <section className="mb-8">
                   <h2 className="text-2xl font-bold text-[#3498db] pl-4 mb-4">cris<span className='text-[#2c3e50]'>Developer</span></h2>
                 </section>
@@ -138,25 +137,17 @@ export default function Testimonios() {
         )}
       </AnimatePresence>
 
-      {/* Info icon */}
-      <figure className="fixed w-10 h-10 bg-white rounded-full flex justify-center items-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] top-28 left-4 z-[10]">
-        <FaInfoCircle className="text-[#3498db] text-2xl" />
-      </figure>
-
       <main>
-        <AnimatePresence mode="wait">
-          <motion.section
-            key={pathname}
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -100, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed right-0 top-22 w-[250px] h-[50px] items-start bg-white flex rounded-s-4xl shadow-md z-[20]"
-            style={{ boxShadow: 'inset 0 -8px 8px rgba(0, 149, 255, 0.2)' }}
-          >
-            <h1 className="ml-6 mt-2 text-2xl text-[#0A1B58]">Testimonios</h1>
-          </motion.section>
-        </AnimatePresence>
+        <motion.section
+          key="testimonios-header"
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="fixed right-0 top-22 w-[250px] h-[50px] items-start bg-white flex rounded-s-4xl shadow-md z-[20]"
+          style={{ boxShadow: 'inset 0 -8px 8px rgba(0, 149, 255, 0.2)' }}
+        >
+          <h1 className="ml-6 mt-2 text-2xl text-[#0A1B58]">Testimonios</h1>
+        </motion.section>
 
         {/* Sección de Testimonios */}
         <section className="pt-32 pb-16 px-4 md:px-8 lg:px-16">
@@ -183,7 +174,6 @@ export default function Testimonios() {
                           style={{
                             borderRadius: 'inherit'
                           }}
-                          // Añade placeholder para imágenes
                           placeholder="blur"
                           blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZWVlZWVlIi8+PC9zdmc+"
                         />
@@ -194,7 +184,7 @@ export default function Testimonios() {
                   {/* Texto del testimonio */}
                   <div className="text-center max-w-xs">
                     <h3 className="text-xl font-bold text-[#2c3e50] mb-2">{testimonio.nombre}</h3>
-                    <p className="text-gray-700 italic">"{testimonio.opinion}"</p>
+                    <p className="text-gray-700 italic">&quot;{testimonio.opinion}&quot;</p>
                   </div>
                 </motion.div>
               ))}
@@ -210,33 +200,22 @@ export default function Testimonios() {
         transition={{ delay: 0.2 }}
         className="fixed bottom-4 left-1/2 md:left-30 transform -translate-x-1/2 flex gap-5 z-[2]"
       >
-        <motion.a 
-          whileHover={{ y: -5, rotate: 5 }}
-          href="#" 
-          title="GitHub"
-          className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden group"
-        >
-          <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
-          <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0"></span>
-        </motion.a>
-        <motion.a 
-          whileHover={{ y: -5, rotate: 5 }}
-          href="#" 
-          title="Facebook"
-          className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden group"
-        >
-          <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
-          <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0"></span>
-        </motion.a>
-        <motion.a 
-          whileHover={{ y: -5, rotate: 5 }}
-          href="#" 
-          title="WhatsApp"
-          className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden group"
-        >
-          <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
-          <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0"></span>
-        </motion.a>
+        {[
+          { icon: FaGithub, href: "#", title: "GitHub" },
+          { icon: FaFacebookF, href: "#", title: "Facebook" },
+          { icon: FaWhatsapp, href: "#", title: "WhatsApp" }
+        ].map((social, index) => (
+          <motion.a 
+            key={index}
+            whileHover={{ y: -5, rotate: 5 }}
+            href={social.href}
+            title={social.title}
+            className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden group"
+          >
+            <social.icon className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
+            <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
+          </motion.a>
+        ))}
       </motion.nav>
     </>
   );
