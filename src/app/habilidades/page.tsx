@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { FaGithub, FaFacebookF, FaWhatsapp, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 interface SkillCardProps {
