@@ -55,42 +55,7 @@ export default function Proyectos() {
       ],
       githubUrl: "https://github.com/tuusuario/reloj-alarma"
     },
-    {
-      id: 4,
-      title: "Coaligo",
-      img: "/coaligo.png",
-      description: "Plataforma colaborativa para desarrolladores que buscan compartir y mejorar su código.",
-      lines: [
-        "Editor de código colaborativo",
-        "Sistema de versionamiento integrado",
-        "Compartir fragmentos de código"
-      ],
-      githubUrl: "https://github.com/tuusuario/coaligo"
-    },
-    {
-      id: 5,
-      title: "Gestor de Tareas",
-      img: "/gestor-tareas.png",
-      description: "Organiza tus actividades diarias con este práctico gestor de tareas con recordatorios.",
-      lines: [
-        "Organización por categorías y prioridades",
-        "Recordatorios y notificaciones",
-        "Sincronización multiplataforma"
-      ],
-      githubUrl: "https://github.com/tuusuario/gestor-tareas"
-    },
-    {
-      id: 6,
-      title: "Clima App",
-      img: "/clima-app.png",
-      description: "Aplicación del clima que muestra pronósticos precisos para tu ubicación actual.",
-      lines: [
-        "Pronóstico del tiempo en tiempo real",
-        "Ubicación automática o manual",
-        "Gráficos y predicciones extendidas"
-      ],
-      githubUrl: "https://github.com/tuusuario/clima-app"
-    }
+
   ];
 
   const nextProject = () => {

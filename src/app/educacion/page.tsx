@@ -36,55 +36,7 @@ export default function Educacion() {
       institution: "SENA",
       description: "Curso orientado al dominio de funciones complejas en hojas de cálculo. Se abordaron temas como tablas dinámicas y aplicación de herramientas para el análisis y la visualización de datos."
     },
-    {
-      year: "2020",
-      title: "DISEÑO DE INTERFACES DE USUARIO",
-      decorationColor: "#BBF0FF",
-      institution: "Instituto de Diseño",
-      description: "Principios de diseño UI/UX y herramientas modernas para creación de interfaces."
-    },
-    {
-      year: "2021",
-      title: "DESARROLLO FRONTEND AVANZADO",
-      decorationColor: "#BBF0FF",
-      institution: "Escuela de Código",
-      description: "Profundización en frameworks modernos como React y Vue.js para desarrollo frontend."
-    },
-    {
-      year: "2021",
-      title: "BACKEND CON NODE.JS",
-      decorationColor: "#BBF0FF",
-      institution: "Academia de Programación",
-      description: "Creación de APIs RESTful y servicios backend utilizando Node.js y Express."
-    },
-    {
-      year: "2022",
-      title: "TÉCNICO EN DISEÑO E INTEGRACION DE MULTIMEDIA",
-      decorationColor: "#BBF0FF",
-      institution: "SENA",
-      description: "Formación técnica en herramientas de diseño gráfico, animación y producción digital. Desarrollo de proyectos multimedia interactivos utilizando software especializado."
-    },
-    {
-      year: "2022",
-      title: "BACHILLER",
-      decorationColor: "#BBF0FF",
-      institution: "Institución Educativa",
-      description: "Culminación en media. Fortalezas básicas y orientación en actividades."
-    },
-    {
-      year: "2023",
-      title: "INGENIERÍA DE SOFTWARE",
-      decorationColor: "#BBF0FF",
-      institution: "Universidad Nacional",
-      description: "Formación en principios de ingeniería de software, arquitectura de sistemas y desarrollo ágil."
-    },
-    {
-      year: "2023",
-      title: "CLOUD COMPUTING",
-      decorationColor: "#BBF0FF",
-      institution: "Plataforma de Cursos Online",
-      description: "Certificación en servicios en la nube con AWS y despliegue de aplicaciones escalables."
-    }
+
   ];
 
   useEffect(() => {
@@ -250,7 +202,7 @@ export default function Educacion() {
           {/* Versión Desktop - Horizontal (sin cambios) */}
           <div className="hidden lg:block">
             <div className="relative h-[500px] w-full overflow-hidden">
-              <div className="absolute left-0 right-0 top-[30%] h-1 bg-gray-300 z-0">
+              <div className="absolute left-0 right-0 top-[30%] h-2 bg-gray-300 z-0">
                 <div 
                   className="h-full bg-[#48E7FF] transition-all duration-300"
                   style={{ width: `${scrollProgress}%` }}

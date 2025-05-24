@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import Head from 'next/head';
-import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaVolumeUp, FaVolumeMute, FaBars, FaTimes } from 'react-icons/fa';
+import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaVolumeUp, FaVolumeMute, FaBars, FaTimes, FaLock } from 'react-icons/fa';
 import Link from 'next/link';
 
 export default function Home() {
@@ -11,10 +11,17 @@ export default function Home() {
   const [videoEnded, setVideoEnded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [challengeMode, setChallengeMode] = useState(false);
+  const [showChallengeModal, setShowChallengeModal] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const mediaContainerRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const isPageLocked = (path: string) => {
+    return challengeMode && !['casa', 'sobremi'].includes(path);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,6 +35,9 @@ export default function Home() {
     const handleClickOutside = (event: MouseEvent) => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
         setMobileMenuOpen(false);
+      }
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        setShowChallengeModal(false);
       }
     };
 
@@ -63,6 +73,16 @@ export default function Home() {
     }
   };
 
+  const toggleChallengeMode = (activate: boolean) => {
+    setChallengeMode(activate);
+    setShowChallengeModal(false);
+  };
+
+  const handleLockedClick = (e: React.MouseEvent, pageName: string) => {
+    e.preventDefault();
+    setShowChallengeModal(true);
+  };
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -91,7 +111,7 @@ export default function Home() {
       
       <section className="fixed w-[300px] h-[300px] rounded-[53%_47%_52%_48%_/_36%_41%_59%_64%] bg-gradient-to-br from-[rgba(52,152,219,0.3)] to-[rgba(41,128,185,0.1)] top-[-50px] right-[-100px] animate-float z-[-1]"></section>
       <section className="fixed w-[200px] h-[200px] rounded-[30%_70%_70%_30%_/_30%_52%_48%_70%] bg-gradient-to-tr from-[rgba(41,128,185,0.2)] to-[rgba(52,152,219,0.05)] bottom-[50px] left-[-50px] animate-float animation-direction-reverse animation-duration-10s z-[-1]"></section>
-      <section className="fixed w-[150px] h-[150px] rounded-[60%_40%_30%_70%_/_60%_30%_70%_40%] bg-gradient-to-br from-[rgba(46,204,113,0.2)] to-[rgba(39,174,96,0.05)] top-[40%] left-[20%] animate-float animation-duration-12s z-[-1]"></section>
+      <section className="fixed w-[200px] h-[200px]  rounded-[60%_40%_30%_70%_/_60%_30%_70%_40%] bg-gradient-to-br from-[rgba(46,204,113,0.2)] to-[rgba(39,174,96,0.05)] top-[40%] left-[20%] animate-float animation-duration-12s z-[-1]"></section>
       <section className="fixed w-[100px] h-[100px] rounded-full bg-gradient-to-br from-[rgba(231,76,60,0.15)] to-[rgba(192,57,43,0.05)] top-[30%] right-[20%] animate-float animation-duration-6s z-[-1]"></section>
       
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[10%] right-[5%]"></section>
@@ -107,14 +127,21 @@ export default function Home() {
           {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
             const path = item.toLowerCase().replace(/\s+/g, '');
             const href = path === 'casa' ? '/' : `/${path}`;
+            const locked = isPageLocked(path);
             
             return (
               <li key={item}>
                 <Link
                   href={href}
-                  className="text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 rounded-full bg-white/70 shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:text-white hover:bg-[#3498db] hover:-translate-y-[3px] hover:shadow-[0_5px_15px_rgba(52,152,219,0.3)]"
+                  onClick={(e) => locked && handleLockedClick(e, item)}
+                  className={`text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 rounded-full ${
+                    locked 
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                      : 'bg-white/70 shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:text-white hover:bg-[#3498db] hover:-translate-y-[3px] hover:shadow-[0_5px_15px_rgba(52,152,219,0.3)]'
+                  }`}
                 >
                   {item}
+                  {locked && <FaLock className="ml-1 inline-block text-xs" />}
                 </Link>
               </li>
             );
@@ -153,15 +180,27 @@ export default function Home() {
             {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
               const path = item.toLowerCase().replace(/\s+/g, '');
               const href = path === 'casa' ? '/' : `/${path}`;
+              const locked = isPageLocked(path);
               
               return (
                 <li key={item}>
                   <Link
                     href={href}
-                    className="block text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 pl-10 hover:bg-[#3498db]/10 hover:text-[#3498db]"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      if (locked) {
+                        e.preventDefault();
+                        handleLockedClick(e, item);
+                      }
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`block text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 pl-10 ${
+                      locked 
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                        : 'hover:bg-[#3498db]/10 hover:text-[#3498db]'
+                    }`}
                   >
                     {item}
+                    {locked && <FaLock className="ml-2 inline-block text-xs" />}
                   </Link>
                 </li>
               );
@@ -170,14 +209,63 @@ export default function Home() {
         </section>
       </aside>
 
-      <figure className="fixed w-10 h-10 bg-white rounded-full flex justify-center items-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] top-28 left-4 z-[10]">
-        <FaInfoCircle className="text-[#3498db] text-2xl" />
+      <figure 
+        className="fixed w-10 h-10 bg-white rounded-full flex justify-center items-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] top-28 left-4 z-[10] cursor-pointer hover:scale-110 transition-transform"
+        onClick={() => setShowChallengeModal(true)}
+        title={challengeMode ? "Modo desafío activado" : "Modo desafío desactivado"}
+      >
+        <FaInfoCircle className={`text-2xl ${challengeMode ? 'text-red-500' : 'text-[#3498db]'}`} />
       </figure>
 
-      <main className="relative p-10">
+      {showChallengeModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
+          <div 
+            ref={modalRef}
+            className="bg-white rounded-2xl overflow-hidden shadow-xl w-full max-w-md animate-scale-in"
+          >
+            <div className="bg-gradient-to-r from-[#3498db] to-[#4fa3e0] p-6 text-white">
+              <h3 className="text-2xl font-bold">Modo Desafío</h3>
+              <p className="mt-1 opacity-90">
+                {challengeMode 
+                  ? "Actualmente activado - ¿Quieres desactivarlo?" 
+                  : "¿Activar el modo desafío?"}
+              </p>
+            </div>
+            
+            <div className="p-6">
+              <p className="text-gray-600 mb-6">
+                {challengeMode 
+                  ? "Al desactivarlo, todas las secciones estarán disponibles sin restricciones."
+                  : "Al activarlo, solo podrás acceder a 'Casa' y 'Sobre mí'. Las demás secciones requerirán completar desafíos."}
+              </p>
+              
+              <div className="flex gap-4 justify-end">
+                <button
+                  onClick={() => setShowChallengeModal(false)}
+                  className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={() => toggleChallengeMode(!challengeMode)}
+                  className={`px-6 py-2 rounded-lg transition-colors ${
+                    challengeMode
+                      ? 'bg-red-500 hover:bg-red-600 text-white'
+                      : 'bg-[#3498db] hover:bg-[#2980b9] text-white'
+                  }`}
+                >
+                  {challengeMode ? 'Desactivar' : 'Activar'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <main className="relative p-10 sm:pt-25 pt-5">
         <article className="flex flex-col items-center max-w-[1200px] mx-auto p-8 relative z-10">
           <section className="flex flex-col md:flex-row items-center justify-between w-full mt-8 relative">
-            <header className="flex-1 pr-0 md:pr-8 mb-12 md:mb-0 relative z-[2] text-center md:text-left">
+            <header className="flex-col pr-0 md:pr-8 mb-12 md:mb-0 relative z-[2] text-center md:text-left">
               <p className="text-[#3498db] text-xl mb-2 font-medium tracking-[1px] relative inline-block">
                 hola, soy Cristhian David
                 <span className="absolute w-10 h-[2px] bg-[#3498db] bottom-[-5px] left-1/2 md:left-0 transform md:transform-none -translate-x-1/2 md:translate-x-0"></span>
@@ -203,7 +291,7 @@ export default function Home() {
             
             <div 
               ref={mediaContainerRef}
-              className={`relative w-full md:w-[400px] h-[225px] md:h-[250px] rounded-3xl bg-white overflow-hidden shadow-xl transition-all duration-1000 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+              className={`relative w-[300] md:w-[400px] h-[250px] md:h-[250px] rounded-3xl bg-white overflow-hidden shadow-xl transition-all duration-1000 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
                 isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-[100px] opacity-0'
               }`}
             >
@@ -255,7 +343,7 @@ export default function Home() {
         </article>
       </main>
 
-      <nav className="flex gap-5 ml-5 mt-10 md:top-10/12 md:transform md:-translate-y-1/2 z-[2]">
+      <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-30">
         <a 
           href="#" 
           title="GitHub"
@@ -264,6 +352,7 @@ export default function Home() {
           <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
           <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0"></span>
         </a>
+
         <a 
           href="#" 
           title="Facebook"
@@ -272,6 +361,7 @@ export default function Home() {
           <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
           <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0"></span>
         </a>
+
         <a 
           href="#" 
           title="WhatsApp"
@@ -309,7 +399,14 @@ export default function Home() {
           animation-direction: reverse;
         }
         
-
+        @keyframes scale-in {
+          0% { transform: scale(0.95); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .animate-scale-in {
+          animation: scale-in 0.2s ease-out forwards;
+        }
       `}</style>
     </>
   );
