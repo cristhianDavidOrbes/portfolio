@@ -13,18 +13,18 @@ export default function Testimonios() {
 
   const testimonios = [
     {
-      nombre: "Juan Pérez",
-      opinion: "Cristhian es un profesional excepcional. Su trabajo en nuestro proyecto fue impecable y siempre entregó más de lo esperado.",
-      imagen: "/testimonio1.jpg"
+      nombre: "Miguel Felipe Ceballos Ramirez",
+      opinion: "El ingeniero orbes es una gran persona que busca la ayuda hacia los demás sin buscar algo a cambio, un gran profesional el cual ayuda a su círculo en diferentes problemas que tengan que ver con la ingeniería de software, un profesional muy completo el cual sabe exactamente lo necesario para resolver cualquier duda",
+      imagen: "/testimonio1.png"
     },
     {
-      nombre: "María González",
-      opinion: "Trabajar con Cristhian fue una experiencia increíble. Su atención al detalle y conocimientos técnicos son sobresalientes.",
-      imagen: "/testimonio2.jpg"
+      nombre: "Johan Steven Muñoz Enriquez",
+      opinion: "Yo recomiendo al joven Cristian orbes, porque gracias a el he aprendido muchas cosas que me han servido para aprender sobre la ingeniería, me ha ayudado de manera increíble para aprender mucho sobre diferentes temas que en un principio no conocía pero gracias a el los tengo claros, lo recomiendo mucho y de igual forma le agradezco mucho por toda la ayuda que me ha brindado a lo largo de este tiempo",
+      imagen: "/testimonio2.png"
     },
     {
-      nombre: "Carlos Rodríguez",
-      opinion: "Recomiendo totalmente a Cristhian. Su capacidad para resolver problemas complejos y su profesionalismo son dignos de admiración.",
+      nombre: "?",
+      opinion: "?",
       imagen: "/testimonio3.jpg"
     }
   ];
@@ -44,7 +44,7 @@ export default function Testimonios() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Background elements */}
+  
       <section className="fixed inset-0 bg-gradient-to-br from-[#EBF8FF] to-[#e6f7ff] z-[-2]" />
       <section className="fixed w-[300px] h-[300px] rounded-[53%_47%_52%_48%_/_36%_41%_59%_64%] bg-gradient-to-br from-[rgba(52,152,219,0.3)] to-[rgba(41,128,185,0.1)] top-[-50px] right-[-100px] animate-float z-[-1]" />
       <section className="fixed w-[200px] h-[200px] rounded-[30%_70%_70%_30%_/_30%_52%_48%_70%] bg-gradient-to-tr from-[rgba(41,128,185,0.2)] to-[rgba(52,152,219,0.05)] bottom-[50px] left-[-50px] animate-float animation-direction-reverse animation-duration-10s z-[-1]" />
@@ -53,7 +53,7 @@ export default function Testimonios() {
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[10%] right-[5%]" />
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]" />
 
-      {/* Navigation */}
+
       <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
         <Link href="/" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
@@ -87,7 +87,7 @@ export default function Testimonios() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
+
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
@@ -148,7 +148,7 @@ export default function Testimonios() {
           <h1 className="ml-6 mt-2 text-2xl text-[#0A1B58]">Testimonios</h1>
         </motion.section>
 
-        {/* Sección de Testimonios */}
+
         <section className="pt-32 pb-16 px-4 md:px-8 lg:px-16">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -180,7 +180,7 @@ export default function Testimonios() {
                     </div>
                   </div>
                   
-                  {/* Texto del testimonio */}
+          
                   <div className="text-center max-w-xs">
                     <h3 className="text-xl font-bold text-[#2c3e50] mb-2">{testimonio.nombre}</h3>
                     <p className="text-gray-700 italic">&quot;{testimonio.opinion}&quot;</p>
@@ -193,29 +193,40 @@ export default function Testimonios() {
       </main>
 
       {/* Fixed social media icons at bottom center */}
-      <motion.nav 
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="fixed bottom-4 left-1/2 md:left-30 transform -translate-x-1/2 flex gap-5 z-[2]"
-      >
-        {[
-          { icon: FaGithub, href: "#", title: "GitHub" },
-          { icon: FaFacebookF, href: "#", title: "Facebook" },
-          { icon: FaWhatsapp, href: "#", title: "WhatsApp" }
-        ].map((social, index) => (
-          <motion.a 
-            key={index}
-            whileHover={{ y: -5, rotate: 5 }}
-            href={social.href}
-            title={social.title}
-            className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden group"
-          >
-            <social.icon className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
-            <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
-          </motion.a>
-        ))}
-      </motion.nav>
+<nav className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-10">
+  <a 
+    href="https://github.com/cristhianDavidOrbes" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    title="GitHub"
+    className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
+  >
+    <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
+    <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
+  </a>
+
+  <a 
+    href="https://www.facebook.com/profile.php?id=61566351822469" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    title="Facebook"
+    className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
+  >
+    <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
+    <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
+  </a>
+
+  <a 
+    href="https://wa.me/573027515644" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    title="WhatsApp"
+    className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
+  >
+    <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
+    <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
+  </a>
+</nav>
     </>
   );
 }

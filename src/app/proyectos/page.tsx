@@ -17,7 +17,7 @@ export default function Proyectos() {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  // Proyectos con imágenes y enlaces a GitHub
+ 
   const projects = [
     {
       id: 1,
@@ -41,7 +41,7 @@ export default function Proyectos() {
         "Gestión de disponibilidad en tiempo real",
         "Panel de administración integrado"
       ],
-      githubUrl: "https://github.com/tuusuario/sistema-reservas"
+      githubUrl: "https://github.com/cristhianDavidOrbes/turismo"
     },
     {
       id: 3,
@@ -101,7 +101,7 @@ export default function Proyectos() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Background elements */}
+   
       <section className="fixed inset-0 bg-gradient-to-br from-[#EBF8FF] to-[#e6f7ff] z-[-2]"></section>
       <section className="fixed w-[300px] h-[300px] rounded-[53%_47%_52%_48%_/_36%_41%_59%_64%] bg-gradient-to-br from-[rgba(52,152,219,0.3)] to-[rgba(41,128,185,0.1)] top-[-50px] right-[-100px] animate-float z-[-1]"></section>
       <section className="fixed w-[200px] h-[200px] rounded-[30%_70%_70%_30%_/_30%_52%_48%_70%] bg-gradient-to-tr from-[rgba(41,128,185,0.2)] to-[rgba(52,152,219,0.05)] bottom-[50px] left-[-50px] animate-float animation-direction-reverse animation-duration-10s z-[-1]"></section>
@@ -110,7 +110,7 @@ export default function Proyectos() {
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[10%] right-[5%]"></section>
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]"></section>
 
-      {/* Navigation */}
+     
       <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
         <Link href="/" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
@@ -193,7 +193,7 @@ export default function Proyectos() {
         )}
       </AnimatePresence>
 
-      {/* Info icon */}
+    
       <figure className="fixed w-10 h-10 bg-white rounded-full flex justify-center items-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] top-28 left-4 z-[10]">
         <FaInfoCircle className="text-[#3498db] text-2xl" />
       </figure>
@@ -213,10 +213,10 @@ export default function Proyectos() {
           </motion.section>
         </AnimatePresence>
 
-        {/* Carrusel de Proyectos */}
+       
         <section className="pt-32 pb-16 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-7xl mx-auto">
           <div className="relative w-full h-[600px] overflow-hidden">
-            {/* Botones de navegación */}
+            
             <button 
               onClick={prevProject}
               className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#3498db] hover:text-white transition-colors duration-300"
@@ -233,7 +233,7 @@ export default function Proyectos() {
               <FaChevronRight />
             </button>
 
-            {/* Contenedor de proyectos */}
+           
             <div 
               ref={projectsRef}
               className="relative w-full h-full flex items-center"
@@ -264,7 +264,7 @@ export default function Proyectos() {
                       }`}
                     >
                       <div className="bg-white rounded-xl shadow-xl overflow-hidden mx-4 transform transition-all duration-300">
-                        {/* Contenedor de imagen modificado */}
+                       
                         <div className="relative h-48 w-full flex items-center justify-center bg-gray-100">
                           <Image 
                             src={project.img} 
@@ -288,7 +288,7 @@ export default function Proyectos() {
                             {project.description}
                           </p>
                           
-                          {/* Botón de GitHub */}
+                        
                           <div className="flex justify-center">
                             <a 
                               href={project.githubUrl} 

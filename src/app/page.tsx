@@ -6,7 +6,7 @@ import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaVolumeUp, FaVolumeMu
 import Link from 'next/link';
 
 export default function Home() {
-  // Estados
+ 
   const [showVideo, setShowVideo] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [videoEnded, setVideoEnded] = useState(false);
@@ -15,19 +15,19 @@ export default function Home() {
   const [challengeMode, setChallengeMode] = useState(false);
   const [showChallengeModal, setShowChallengeModal] = useState(false);
   
-  // Referencias
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const mediaContainerRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Verificar si una página está bloqueada
+ 
   const isPageLocked = (path: string) => {
     return challengeMode && !['casa', 'sobremi'].includes(path);
   };
 
-  // Efectos
+
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300);
     return () => clearTimeout(timer);
@@ -47,7 +47,6 @@ export default function Home() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Handlers
   const handleWhoAmIClick = () => {
     setVideoEnded(false);
     setTimeout(() => {
@@ -96,7 +95,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Fondos decorativos */}
+  
       <section className="fixed inset-0 bg-gradient-to-br from-[#EBF8FF] to-[#e6f7ff] z-[-2]" />
       <section className="fixed w-[300px] h-[300px] rounded-[53%_47%_52%_48%_/_36%_41%_59%_64%] bg-gradient-to-br from-[rgba(52,152,219,0.3)] to-[rgba(41,128,185,0.1)] top-[-50px] right-[-100px] animate-float z-[-1]" />
       <section className="fixed w-[200px] h-[200px] rounded-[30%_70%_70%_30%_/_30%_52%_48%_70%] bg-gradient-to-tr from-[rgba(41,128,185,0.2)] to-[rgba(52,152,219,0.05)] bottom-[50px] left-[-50px] animate-float animation-direction-reverse animation-duration-10s z-[-1]" />
@@ -105,7 +104,7 @@ export default function Home() {
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[10%] right-[5%]" />
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]" />
 
-      {/* Navegación principal */}
+    
       <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
         <a href="#" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
@@ -146,7 +145,7 @@ export default function Home() {
         </button>
       </nav>
 
-      {/* Menú móvil */}
+
       {mobileMenuOpen && (
         <aside 
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[105] transition-opacity duration-300 lg:hidden"
@@ -254,7 +253,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* Contenido principal */}
+
       <main className="relative p-10 sm:pt-25 pt-5">
         <article className="flex flex-col items-center max-w-[1200px] mx-auto p-8 relative z-10">
           <section className="flex flex-col md:flex-row items-center justify-between w-full mt-8 relative">
@@ -282,9 +281,10 @@ export default function Home() {
               </button>
             </header>
             
+          
             <div 
               ref={mediaContainerRef}
-              className={`relative w-[300] md:w-[400px] h-[250px] md:h-[250px] rounded-3xl bg-white overflow-hidden shadow-xl transition-all duration-1000 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+              className={`relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-3xl bg-white overflow-hidden shadow-xl transition-all duration-1000 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
                 isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-[100px] opacity-0'
               }`}
             >
@@ -292,14 +292,16 @@ export default function Home() {
                 ref={imageRef}
                 className={`absolute inset-0 ${showVideo ? 'opacity-0' : 'opacity-100'}`}
               >
-                <Image
-                  src="/prueba1.png"
-                  alt="Mi rostro"
-                  width={400}
-                  height={250}
-                  className="w-full h-full object-cover"
-                  priority
-                />
+                <div className="w-full h-full relative">
+                  <Image
+                    src="/prueba1.png"
+                    alt="Mi rostro"
+                    layout="fill"
+                    objectFit="cover"
+                    className="w-full h-full"
+                    priority
+                  />
+                </div>
               </figure>
               
               <figure className={`absolute inset-0 ${showVideo ? 'opacity-100' : 'opacity-0'}`}>
@@ -336,35 +338,40 @@ export default function Home() {
         </article>
       </main>
 
-      {/* Redes sociales */}
-      <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-30">
-        <a 
-          href="#" 
-          title="GitHub"
-          className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
-        >
-          <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
-          <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
-        </a>
+<nav className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-30">
+  <a 
+    href="https://github.com/cristhianDavidOrbes" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    title="GitHub"
+    className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
+  >
+    <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
+    <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
+  </a>
 
-        <a 
-          href="#" 
-          title="Facebook"
-          className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
-        >
-          <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
-          <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
-        </a>
+  <a 
+    href="https://www.facebook.com/profile.php?id=61566351822469" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    title="Facebook"
+    className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
+  >
+    <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
+    <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
+  </a>
 
-        <a 
-          href="#" 
-          title="WhatsApp"
-          className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
-        >
-          <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
-          <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
-        </a>
-      </nav>
+  <a 
+    href="https://wa.me/573027515644" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    title="WhatsApp"
+    className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
+  >
+    <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
+    <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
+  </a>
+</nav>
 
       {/* Animaciones CSS */}
       <style jsx global>{`
