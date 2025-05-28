@@ -23,9 +23,9 @@ export default function Testimonios() {
       imagen: "/testimonio2.png"
     },
     {
-      nombre: "?",
-      opinion: "?",
-      imagen: "/testimonio3.jpg"
+      nombre: "samuel vallejo rodriges",
+      opinion: "Cristian orbes ha sido una persona que me ha enseñado nuevas cosas y que me ha ayudado a comprender los temas de programación de una forma más sencilla, es una buena persona y alguien con el que puedo tener un apoyo en cualquier momento porque siempre va a estar disponible para ayudar a los demás, yo lo recomiendo mucho aparte porque tiene muchos conocimientos en distintas áreas y que domina muy bien los temas",
+      imagen: "/testimonio3.png"
     }
   ];
 
