@@ -16,25 +16,25 @@ export default function Educacion() {
 
   const educationData = [
     {
-      year: "2018",
-      title: "INTRODUCCIÓN A LA PROGRAMACIÓN",
-      decorationColor: "#FBDFDF",
-      institution: "Universidad Tecnológica",
-      description: "Curso introductorio a los conceptos básicos de programación y algoritmos."
-    },
-    {
-      year: "2019",
-      title: "DESARROLLO WEB BÁSICO",
-      decorationColor: "#D8FFFA",
-      institution: "Academia Digital",
-      description: "Fundamentos de HTML, CSS y JavaScript para desarrollo de sitios web estáticos."
-    },
-    {
       year: "2020",
       title: "HERRAMIENTAS AVANZADAS DE HOJA DE CALCULO",
+      decorationColor: "#FBDFDF",
+      institution: "sena",
+      description: "Curso orientado al dominio de funciones complejas en hojas de cálculo. Se abordaron temas como tablas dinámicas y  Aplicación de herramientas para el análisis y la visualización de datos."
+    },
+    {
+      year: "2022",
+      title: "TÉCNICO EN DISEÑO E INTEGRACION DE MULTIMEDIA",
+      decorationColor: "#D8FFFA",
+      institution: "sena",
+      description: "Formación técnica en herramientas de diseño gráfico, animación y producción digital. Desarrollo de proyectos multimedia interactivos utilizando software especializado. "
+    },
+    {
+      year: "2022",
+      title: "GRADUACION BACHILLERATO",
       decorationColor: "#9CF9FC",
-      institution: "SENA",
-      description: "Curso orientado al dominio de funciones complejas en hojas de cálculo. Se abordaron temas como tablas dinámicas y aplicación de herramientas para el análisis y la visualización de datos."
+      institution: "institucion educativa municipal antonio nariño",
+      description: "Culminación satisfactoria de la educación media. Fortalecimiento de competencias básicas y orientación vocacional.Participación en actividades académicas y extracurriculares."
     },
 
   ];
