@@ -76,6 +76,7 @@ export default function Home() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+    video.disablePictureInPicture = true;
 
     const handleEnded = () => {
       setShowVideo(false);
@@ -96,13 +97,13 @@ export default function Home() {
       </Head>
 
   
-      <section className="fixed inset-0 bg-gradient-to-br from-[#EBF8FF] to-[#e6f7ff] z-[-2]" />
-      <section className="fixed w-[300px] h-[300px] rounded-[53%_47%_52%_48%_/_36%_41%_59%_64%] bg-gradient-to-br from-[rgba(52,152,219,0.3)] to-[rgba(41,128,185,0.1)] top-[-50px] right-[-100px] animate-float z-[-1]" />
-      <section className="fixed w-[200px] h-[200px] rounded-[30%_70%_70%_30%_/_30%_52%_48%_70%] bg-gradient-to-tr from-[rgba(41,128,185,0.2)] to-[rgba(52,152,219,0.05)] bottom-[50px] left-[-50px] animate-float animation-direction-reverse animation-duration-10s z-[-1]" />
-      <section className="fixed w-[200px] h-[200px] rounded-[60%_40%_30%_70%_/_60%_30%_70%_40%] bg-gradient-to-br from-[rgba(46,204,113,0.2)] to-[rgba(39,174,96,0.05)] top-[40%] left-[20%] animate-float animation-duration-12s z-[-1]" />
-      <section className="fixed w-[100px] h-[100px] rounded-full bg-gradient-to-br from-[rgba(231,76,60,0.15)] to-[rgba(192,57,43,0.05)] top-[30%] right-[20%] animate-float animation-duration-6s z-[-1]" />
-      <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[10%] right-[5%]" />
-      <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]" />
+      <div aria-hidden="true" className="fixed inset-0 bg-gradient-to-br from-[#EBF8FF] to-[#e6f7ff] z-[-2]" />
+      <div aria-hidden="true" className="fixed w-[300px] h-[300px] rounded-[53%_47%_52%_48%_/_36%_41%_59%_64%] bg-gradient-to-br from-[rgba(52,152,219,0.3)] to-[rgba(41,128,185,0.1)] top-[-50px] right-[-100px] animate-float z-[-1]" />
+      <div aria-hidden="true" className="fixed w-[200px] h-[200px] rounded-[30%_70%_70%_30%_/_30%_52%_48%_70%] bg-gradient-to-tr from-[rgba(41,128,185,0.2)] to-[rgba(52,152,219,0.05)] bottom-[50px] left-[-50px] animate-float animation-direction-reverse animation-duration-10s z-[-1]" />
+      <div aria-hidden="true" className="fixed w-[200px] h-[200px] rounded-[60%_40%_30%_70%_/_60%_30%_70%_40%] bg-gradient-to-br from-[rgba(46,204,113,0.2)] to-[rgba(39,174,96,0.05)] top-[40%] left-[20%] animate-float animation-duration-12s z-[-1]" />
+      <div aria-hidden="true" className="fixed w-[100px] h-[100px] rounded-full bg-gradient-to-br from-[rgba(231,76,60,0.15)] to-[rgba(192,57,43,0.05)] top-[30%] right-[20%] animate-float animation-duration-6s z-[-1]" />
+      <div aria-hidden="true" className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[10%] right-[5%]" />
+      <div aria-hidden="true" className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]" />
 
     
       <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
@@ -159,11 +160,11 @@ export default function Home() {
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <section className="pt-10 relative">
+        <div className="pt-10 relative">
           <menu className="w-64 bg-gray-200 h-0.5 absolute top-20" />
-          <section className="mb-8">
+          <div className="mb-8">
             <h2 className="text-2xl font-bold text-[#3498db] pl-4 mb-4">cris<span className='text-[#2c3e50]'>Developer</span></h2>
-          </section>
+          </div>
           
           <ul className="space-y-4">
             {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
@@ -195,7 +196,7 @@ export default function Home() {
               );
             })}
           </ul>
-        </section>
+        </div>
       </aside>
 
       {/* Botón de activación del modo desafío */}
@@ -255,7 +256,7 @@ export default function Home() {
 
 
       <main className="relative p-10 sm:pt-25 pt-5">
-        <article className="flex flex-col items-center max-w-[1200px] mx-auto p-8 relative z-10">
+        <div className="flex flex-col items-center max-w-[1200px] mx-auto p-8 relative z-10">
           <section className="flex flex-col md:flex-row items-center justify-between w-full mt-8 relative">
             <header className="flex-col pr-0 md:pr-8 mb-12 md:mb-0 relative z-[2] text-center md:text-left">
               <p className="text-[#3498db] text-xl mb-2 font-medium tracking-[1px] relative inline-block">
@@ -309,7 +310,6 @@ export default function Home() {
                   ref={videoRef}
                   className="w-full h-full object-cover"
                   playsInline
-                  disablePictureInPicture
                   controls={false}
                   preload="auto"
                   onContextMenu={(e) => e.preventDefault()}
@@ -335,7 +335,7 @@ export default function Home() {
               </figure>
             </div>
           </section>
-        </article>
+        </div>
       </main>
 
 <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-30">

@@ -1,5 +1,5 @@
 const config = {
-  plugins: ["@tailwindcss/postcss"],
+  plugins: ["@tailwindcss/postcss", "./postcss/flatten-tailwind-atrules.cjs"],
 };
 
 export default config;
