@@ -344,10 +344,9 @@ export default function Home() {
     target="_blank" 
     rel="noopener noreferrer"
     title="GitHub"
-    className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
+    className="w-12 h-12 rounded-full bg-white border border-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] hover:bg-[#1f2937] hover:border-[#1f2937] group"
   >
-    <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
-    <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
+    <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#1f2937] group-hover:text-white" />
   </a>
 
   <a 
@@ -355,10 +354,9 @@ export default function Home() {
     target="_blank" 
     rel="noopener noreferrer"
     title="Facebook"
-    className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
+    className="w-12 h-12 rounded-full bg-white border border-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] hover:bg-[#1456B8] hover:border-[#1456B8] group"
   >
     <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
-    <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
   </a>
 
   <a 
@@ -366,10 +364,9 @@ export default function Home() {
     target="_blank" 
     rel="noopener noreferrer"
     title="WhatsApp"
-    className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
+    className="w-12 h-12 rounded-full bg-white border border-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] hover:bg-[#0D7A40] hover:border-[#0D7A40] group"
   >
-    <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
-    <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
+    <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#0D7A40] group-hover:text-white" />
   </a>
 </nav>
 
