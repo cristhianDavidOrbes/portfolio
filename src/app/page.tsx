@@ -259,12 +259,12 @@ export default function Home() {
         <div className="flex flex-col items-center max-w-[1200px] mx-auto p-8 relative z-10">
           <section className="flex flex-col md:flex-row items-center justify-between w-full mt-8 relative">
             <header className="flex-col pr-0 md:pr-8 mb-12 md:mb-0 relative z-[2] text-center md:text-left">
-              <p className="text-[#3498db] text-xl mb-2 font-medium tracking-[1px] relative inline-block">
+              <p className="text-[#0092FF] text-xl mb-2 font-medium tracking-[1px] relative inline-block">
                 hola, soy Cristhian David
                 <span className="absolute w-10 h-[2px] bg-[#3498db] bottom-[-5px] left-1/2 md:left-0 transform md:transform-none -translate-x-1/2 md:translate-x-0" />
               </p>
               <h1 className="text-4xl md:text-6xl whitespace-nowrap lg:text-7xl font-bold mb-6 text-[#2c3e50] leading-tight relative">
-                ingeniero<br />de <span className="text-[#3498db] relative inline-block">software</span>
+                ingeniero<br />de <span className="text-[#0092FF] relative inline-block">software</span>
               </h1>
               <button 
                 onClick={handleWhoAmIClick}
