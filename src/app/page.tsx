@@ -264,7 +264,7 @@ export default function Home() {
                 <span className="absolute w-10 h-[2px] bg-[#0067B8] bottom-[-5px] left-1/2 md:left-0 transform md:transform-none -translate-x-1/2 md:translate-x-0" />
               </p>
               <h1 className="text-4xl md:text-6xl whitespace-nowrap lg:text-7xl font-bold mb-6 text-[#2c3e50] leading-tight relative">
-                ingeniero<br />de <span className="text-[#0092FF] relative inline-block">software</span>
+                ingeniero<br />de <span className="text-[#0067B8] relative inline-block">software</span>
               </h1>
               <button 
                 onClick={handleWhoAmIClick}
