@@ -13,9 +13,21 @@ export default function Contacto() {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const redesSociales = [
-    { icon: <FaGithub className="text-2xl" />, nombre: "GitHub", url: "#" },
-    { icon: <FaFacebookF className="text-2xl" />, nombre: "Facebook", url: "#" },
-    { icon: <FaWhatsapp className="text-2xl" />, nombre: "WhatsApp", url: "#" }
+    {
+      icon: <FaGithub aria-hidden="true" className="text-2xl" />,
+      nombre: "GitHub",
+      url: "https://github.com/cristhianDavidOrbes"
+    },
+    {
+      icon: <FaFacebookF aria-hidden="true" className="text-2xl" />,
+      nombre: "Facebook",
+      url: "https://www.facebook.com/profile.php?id=61566351822469"
+    },
+    {
+      icon: <FaWhatsapp aria-hidden="true" className="text-2xl" />,
+      nombre: "WhatsApp",
+      url: "https://wa.me/573027515644"
+    }
   ];
 
   return (
@@ -37,13 +49,16 @@ export default function Contacto() {
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]"></section>
 
       {/* Navigation */}
-      <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
+      <nav
+        aria-label="Navegacion principal"
+        className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]"
+      >
         <Link href="/" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
           <span className="absolute w-full h-2 bottom-[2px] left-0 bg-[rgba(52,152,219,0.2)] z-[-1]"></span>
         </Link>
         
-        <menu className="hidden lg:flex gap-2">
+        <ul className="hidden lg:flex gap-2" role="list">
           {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
             const path = item.toLowerCase().replace(/\s+/g, '');
             const href = path === 'casa' ? '/' : `/${path}`;
@@ -59,14 +74,17 @@ export default function Contacto() {
               </li>
             );
           })}
-        </menu>
+        </ul>
         
-        <button 
+        <button
+          type="button"
           className="lg:hidden text-[#34495e] text-2xl z-[110]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Menú"
+          aria-label={mobileMenuOpen ? "Cerrar menu principal" : "Abrir menu principal"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="menu-movil-principal"
         >
-          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          {mobileMenuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
         </button>
       </nav>
 
@@ -81,7 +99,9 @@ export default function Contacto() {
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[105]"
               onClick={() => setMobileMenuOpen(false)}
             />
-            <motion.aside 
+            <motion.aside
+              id="menu-movil-principal"
+              aria-label="Menu movil principal"
               ref={mobileMenuRef}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -90,7 +110,7 @@ export default function Contacto() {
               className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg rounded-tl-4xl z-[110] lg:hidden"
             >
               <section className="pt-10 relative">
-                <menu className="w-64 bg-gray-200 h-0.5 absolute top-20"></menu>
+                <div className="w-64 bg-gray-200 h-0.5 absolute top-20" aria-hidden="true"></div>
                 <section className="mb-8">
                   <h2 className="text-2xl font-bold text-[#3498db] pl-4 mb-4">cris<span className='text-[#2c3e50]'>Developer</span></h2>
                 </section>
@@ -120,11 +140,11 @@ export default function Contacto() {
       </AnimatePresence>
 
       {/* Info icon */}
-      <figure className="fixed w-10 h-10 bg-white rounded-full flex justify-center items-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] top-28 left-4 z-[10]">
-        <FaInfoCircle className="text-[#3498db] text-2xl" />
+      <figure aria-hidden="true" className="fixed w-10 h-10 bg-white rounded-full flex justify-center items-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] top-28 left-4 z-[10]">
+        <FaInfoCircle aria-hidden="true" className="text-[#3498db] text-2xl" />
       </figure>
 
-      <main>
+      <main id="contenido-principal" tabIndex={-1}>
         <AnimatePresence mode="wait">
           <motion.section
             key={pathname}
@@ -153,6 +173,9 @@ export default function Contacto() {
                       key={index}
                       whileHover={{ scale: 1.1 }}
                       href={red.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Abrir ${red.nombre} en una pestana nueva`}
                       className="w-16 h-16 rounded-full bg-[#3498db] text-white flex flex-col items-center justify-center shadow-md"
                     >
                       {red.icon}
@@ -177,7 +200,7 @@ export default function Contacto() {
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
-                    title="Mapa de Pasto, Nariño"
+                    title="Mapa de Pasto, Narino"
                   ></iframe>
                 </div>
               </motion.div>
@@ -193,21 +216,21 @@ export default function Contacto() {
               <h2 className="text-2xl font-bold text-[#2c3e50] mb-8">Información de contacto</h2>
               <ul className="space-y-6">
                 <li className="flex items-start">
-                  <FaMapMarkerAlt className="text-[#3498db] text-xl mt-1 mr-4" />
+                  <FaMapMarkerAlt aria-hidden="true" className="text-[#3498db] text-xl mt-1 mr-4" />
                   <div>
                     <h3 className="text-lg font-semibold text-[#34495e]">Dirección</h3>
                     <p className="text-gray-700">Torres de Mariluz Etapa 1</p>
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <FaEnvelope className="text-[#3498db] text-xl mt-1 mr-4" />
+                  <FaEnvelope aria-hidden="true" className="text-[#3498db] text-xl mt-1 mr-4" />
                   <div>
                     <h3 className="text-lg font-semibold text-[#34495e]">Email</h3>
                     <p className="text-gray-700">cristiandavidl1232@gmail.com</p>
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <FaPhone className="text-[#3498db] text-xl mt-1 mr-4" />
+                  <FaPhone aria-hidden="true" className="text-[#3498db] text-xl mt-1 mr-4" />
                   <div>
                     <h3 className="text-lg font-semibold text-[#34495e]">Teléfono</h3>
                     <p className="text-gray-700">+57 302 751 5644</p>
@@ -220,7 +243,8 @@ export default function Contacto() {
       </main>
 
       {/* Fixed social media icons at bottom center */}
-      <motion.nav 
+      <motion.nav
+        aria-label="Redes sociales"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -228,29 +252,38 @@ export default function Contacto() {
       >
         <motion.a 
           whileHover={{ y: -5, rotate: 5 }}
-          href="#" 
+          href="https://github.com/cristhianDavidOrbes"
+          target="_blank"
+          rel="noopener noreferrer"
           title="GitHub"
+    aria-label="Abrir perfil de GitHub en una pestana nueva"
           className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden group"
         >
-          <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
+          <FaGithub aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
           <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0"></span>
         </motion.a>
         <motion.a 
           whileHover={{ y: -5, rotate: 5 }}
-          href="#" 
+          href="https://www.facebook.com/profile.php?id=61566351822469"
+          target="_blank"
+          rel="noopener noreferrer"
           title="Facebook"
+    aria-label="Abrir perfil de Facebook en una pestana nueva"
           className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden group"
         >
-          <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
+          <FaFacebookF aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
           <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0"></span>
         </motion.a>
         <motion.a 
           whileHover={{ y: -5, rotate: 5 }}
-          href="#" 
+          href="https://wa.me/573027515644"
+          target="_blank"
+          rel="noopener noreferrer"
           title="WhatsApp"
+    aria-label="Abrir chat de WhatsApp en una pestana nueva"
           className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden group"
         >
-          <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
+          <FaWhatsapp aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
           <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0"></span>
         </motion.a>
       </motion.nav>

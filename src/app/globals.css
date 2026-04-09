@@ -7,7 +7,7 @@
   --text-h: 220 55% 21%;
 }
 
-@theme inline {
+  @theme inline {
     --font-primary: "Poppins", "sans-serif";
     --color-app-primary: hsl(var(--primary));
     --color-app-primary-foreground: hsl(var(--primary-foreground));
@@ -38,4 +38,115 @@
     --color-whatsapp: #25d366;
     --color-facebook: #3b5998;
   }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+.app-shell-bg {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #ebf8ff 0%, #e6f7ff 100%);
+}
+
+.app-bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -40;
+  pointer-events: none;
+}
+
+.app-bg-blob {
+  position: fixed;
+  border-radius: 9999px;
+  filter: blur(1px);
+  opacity: 0.55;
+}
+
+.app-bg-blob-1 {
+  width: 360px;
+  height: 360px;
+  top: -120px;
+  right: -120px;
+  background: radial-gradient(circle at 30% 30%, rgba(52, 152, 219, 0.45), rgba(41, 128, 185, 0.12));
+}
+
+.app-bg-blob-2 {
+  width: 260px;
+  height: 260px;
+  bottom: 24px;
+  left: -80px;
+  background: radial-gradient(circle at 60% 40%, rgba(46, 204, 113, 0.35), rgba(39, 174, 96, 0.08));
+}
+
+.app-bg-blob-3 {
+  width: 180px;
+  height: 180px;
+  top: 34%;
+  right: 18%;
+  background: radial-gradient(circle at 45% 45%, rgba(231, 76, 60, 0.22), rgba(192, 57, 43, 0.06));
+}
+
+.app-bg-grid {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  opacity: 0.1;
+  background-image: radial-gradient(circle, #334155 1px, transparent 1px);
+  background-size: 15px 15px;
+}
+
+.app-bg-grid-1 {
+  top: 8%;
+  right: 4%;
+}
+
+.app-bg-grid-2 {
+  bottom: 8%;
+  left: 4%;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 9999;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #0b4db8;
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #0b4db8;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 

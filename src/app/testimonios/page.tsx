@@ -54,13 +54,16 @@ export default function Testimonios() {
       <section className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]" />
 
 
-      <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
+      <nav
+        aria-label="Navegacion principal"
+        className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]"
+      >
         <Link href="/" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
           <span className="absolute w-full h-2 bottom-[2px] left-0 bg-[rgba(52,152,219,0.2)] z-[-1]" />
         </Link>
         
-        <menu className="hidden lg:flex gap-2">
+        <ul className="hidden lg:flex gap-2" role="list">
           {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
             const path = item.toLowerCase().replace(/\s+/g, '');
             const href = path === 'casa' ? '/' : `/${path}`;
@@ -76,14 +79,17 @@ export default function Testimonios() {
               </li>
             );
           })}
-        </menu>
+        </ul>
         
-        <button 
+        <button
+          type="button"
           className="lg:hidden text-[#34495e] text-2xl z-[110]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={mobileMenuOpen ? "Cerrar menu principal" : "Abrir menu principal"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="menu-movil-principal"
         >
-          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          {mobileMenuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
         </button>
       </nav>
 
@@ -98,7 +104,9 @@ export default function Testimonios() {
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[105]"
               onClick={() => setMobileMenuOpen(false)}
             />
-            <motion.aside 
+            <motion.aside
+              id="menu-movil-principal"
+              aria-label="Menu movil principal"
               ref={mobileMenuRef}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -107,7 +115,7 @@ export default function Testimonios() {
               className="fixed top-0 right-0 h-full w-64 bg-white shadow-lg rounded-tl-4xl z-[110] lg:hidden"
             >
               <section className="pt-10 relative">
-                <div className="w-64 bg-gray-200 h-0.5 absolute top-20" />
+                <div className="w-64 bg-gray-200 h-0.5 absolute top-20" aria-hidden="true" />
                 <section className="mb-8">
                   <h2 className="text-2xl font-bold text-[#3498db] pl-4 mb-4">cris<span className='text-[#2c3e50]'>Developer</span></h2>
                 </section>
@@ -136,7 +144,7 @@ export default function Testimonios() {
         )}
       </AnimatePresence>
 
-      <main>
+      <main id="contenido-principal" tabIndex={-1}>
         <motion.section
           key="testimonios-header"
           initial={{ x: 100, opacity: 0 }}
@@ -193,15 +201,16 @@ export default function Testimonios() {
       </main>
 
       {/* Fixed social media icons at bottom center */}
-<nav className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-10">
+<nav aria-label="Redes sociales" className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-10">
   <a 
     href="https://github.com/cristhianDavidOrbes" 
     target="_blank" 
     rel="noopener noreferrer"
     title="GitHub"
+    aria-label="Abrir perfil de GitHub en una pestana nueva"
     className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
   >
-    <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
+    <FaGithub aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
     <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
   </a>
 
@@ -210,9 +219,10 @@ export default function Testimonios() {
     target="_blank" 
     rel="noopener noreferrer"
     title="Facebook"
+    aria-label="Abrir perfil de Facebook en una pestana nueva"
     className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
   >
-    <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
+    <FaFacebookF aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
     <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
   </a>
 
@@ -221,9 +231,10 @@ export default function Testimonios() {
     target="_blank" 
     rel="noopener noreferrer"
     title="WhatsApp"
+    aria-label="Abrir chat de WhatsApp en una pestana nueva"
     className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
   >
-    <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
+    <FaWhatsapp aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
     <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
   </a>
 </nav>

@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 import Head from 'next/head';
-import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaVolumeUp, FaVolumeMute, FaBars, FaTimes, FaLock } from 'react-icons/fa';
+import { FaInfoCircle, FaGithub, FaFacebookF, FaWhatsapp, FaVolumeUp, FaVolumeMute, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 
 export default function Home() {
@@ -12,7 +12,6 @@ export default function Home() {
   const [videoEnded, setVideoEnded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [challengeMode, setChallengeMode] = useState(false);
   const [showChallengeModal, setShowChallengeModal] = useState(false);
   
 
@@ -23,11 +22,6 @@ export default function Home() {
   const modalRef = useRef<HTMLDivElement>(null);
 
  
-  const isPageLocked = (path: string) => {
-    return challengeMode && !['casa', 'sobremi'].includes(path);
-  };
-
-
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300);
     return () => clearTimeout(timer);
@@ -60,16 +54,6 @@ export default function Home() {
       videoRef.current.muted = !videoRef.current.muted;
       setIsMuted(videoRef.current.muted);
     }
-  };
-
-  const toggleChallengeMode = () => {
-    setChallengeMode(prev => !prev);
-    setShowChallengeModal(false);
-  };
-
-  const handleLockedClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setShowChallengeModal(true);
   };
 
   // Control del video
@@ -106,43 +90,41 @@ export default function Home() {
       <div aria-hidden="true" className="fixed w-[200px] h-[200px] bg-[radial-gradient(circle,#444_1px,transparent_1px)] bg-[length:15px_15px] opacity-10 z-[-1] bottom-[10%] left-[5%]" />
 
     
-      <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
-        <a href="#" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
+      <nav
+        aria-label="Navegación principal"
+        className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]"
+      >
+        <Link href="/" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
           <span className="absolute w-full h-2 bottom-[2px] left-0 bg-[rgba(52,152,219,0.2)] z-[-1]" />
-        </a>
+        </Link>
         
-        <menu className="hidden lg:flex gap-2">
+        <ul className="hidden lg:flex gap-2" role="list">
           {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
             const path = item.toLowerCase().replace(/\s+/g, '');
             const href = path === 'casa' ? '/' : `/${path}`;
-            const locked = isPageLocked(path);
-            
             return (
               <li key={item}>
                 <Link
                   href={href}
-                  onClick={(e) => locked && handleLockedClick(e)}
-                  className={`text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 rounded-full ${
-                    locked 
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                      : 'bg-white/70 shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:text-white hover:bg-[#3498db] hover:-translate-y-[3px] hover:shadow-[0_5px_15px_rgba(52,152,219,0.3)]'
-                  }`}
+                  className="text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 rounded-full bg-white/70 shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:text-white hover:bg-[#3498db] hover:-translate-y-[3px] hover:shadow-[0_5px_15px_rgba(52,152,219,0.3)]"
                 >
                   {item}
-                  {locked && <FaLock className="ml-1 inline-block text-xs" />}
                 </Link>
               </li>
             );
           })}
-        </menu>
+        </ul>
         
         <button 
+          type="button"
           className="lg:hidden text-[#34495e] text-2xl z-[110]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Menú"
+          aria-label={mobileMenuOpen ? "Cerrar menú principal" : "Abrir menú principal"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="menu-movil-principal"
         >
-          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          {mobileMenuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
         </button>
       </nav>
 
@@ -155,13 +137,15 @@ export default function Home() {
       )}
 
       <aside 
+        id="menu-movil-principal"
+        aria-label="Menú móvil principal"
         ref={mobileMenuRef}
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg rounded-tl-4xl transform transition-transform duration-300 ease-in-out z-[110] lg:hidden ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="pt-10 relative">
-          <menu className="w-64 bg-gray-200 h-0.5 absolute top-20" />
+          <div className="w-64 bg-gray-200 h-0.5 absolute top-20" aria-hidden="true" />
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-[#3498db] pl-4 mb-4">cris<span className='text-[#2c3e50]'>Developer</span></h2>
           </div>
@@ -170,27 +154,16 @@ export default function Home() {
             {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
               const path = item.toLowerCase().replace(/\s+/g, '');
               const href = path === 'casa' ? '/' : `/${path}`;
-              const locked = isPageLocked(path);
-              
               return (
                 <li key={item}>
                   <Link
                     href={href}
-                    onClick={(e) => {
-                      if (locked) {
-                        e.preventDefault();
-                        handleLockedClick(e);
-                      }
+                    onClick={() => {
                       setMobileMenuOpen(false);
                     }}
-                    className={`block text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 pl-10 ${
-                      locked 
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                        : 'hover:bg-[#3498db]/10 hover:text-[#3498db]'
-                    }`}
+                    className="block text-[#34495e] whitespace-nowrap no-underline font-medium transition-all duration-300 py-2 px-4 pl-10 hover:bg-[#3498db]/10 hover:text-[#3498db]"
                   >
                     {item}
-                    {locked && <FaLock className="ml-2 inline-block text-xs" />}
                   </Link>
                 </li>
               );
@@ -200,53 +173,46 @@ export default function Home() {
       </aside>
 
       {/* Botón de activación del modo desafío */}
-      <figure 
+      <button
+        type="button"
         className="fixed w-10 h-10 bg-white rounded-full flex justify-center items-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] top-28 left-4 z-[10] cursor-pointer hover:scale-110 transition-transform"
         onClick={() => setShowChallengeModal(true)}
-        title={challengeMode ? "Modo desafío activado" : "Modo desafío desactivado"}
+        aria-label="Información del modo desafío"
+        title="Información del modo desafío"
       >
-        <FaInfoCircle className={`text-2xl ${challengeMode ? 'text-red-500' : 'text-[#3498db]'}`} />
-      </figure>
+        <FaInfoCircle aria-hidden="true" className="text-2xl text-[#3498db]" />
+      </button>
 
       {/* Modal del modo desafío */}
       {showChallengeModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
           <div 
             ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-modal-desafio"
+            aria-describedby="descripcion-modal-desafio"
             className="bg-white rounded-2xl overflow-hidden shadow-xl w-full max-w-md animate-scale-in"
           >
             <div className="bg-gradient-to-r from-[#3498db] to-[#4fa3e0] p-6 text-white">
-              <h3 className="text-2xl font-bold">Modo Desafío</h3>
+              <h3 id="titulo-modal-desafio" className="text-2xl font-bold">Modo Desafío</h3>
               <p className="mt-1 opacity-90">
-                {challengeMode 
-                  ? "Actualmente activado - ¿Quieres desactivarlo?" 
-                  : "¿Activar el modo desafío?"}
+                Esta función está en pausa para priorizar la navegación accesible.
               </p>
             </div>
             
             <div className="p-6">
-              <p className="text-gray-600 mb-6">
-                {challengeMode 
-                  ? "Al desactivarlo, todas las secciones estarán disponibles sin restricciones."
-                  : "Al activarlo, solo podrás acceder a 'Casa' y 'Sobre mí'. Las demás secciones requerirán completar desafíos."}
+              <p id="descripcion-modal-desafio" className="text-gray-600 mb-6">
+                Todas las secciones del menú superior se encuentran habilitadas.
               </p>
               
-              <div className="flex gap-4 justify-end">
+              <div className="flex justify-end">
                 <button
+                  type="button"
                   onClick={() => setShowChallengeModal(false)}
                   className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
                 >
                   Cancelar
-                </button>
-                <button
-                  onClick={toggleChallengeMode}
-                  className={`px-6 py-2 rounded-lg transition-colors ${
-                    challengeMode
-                      ? 'bg-red-500 hover:bg-red-600 text-white'
-                      : 'bg-[#3498db] hover:bg-[#2980b9] text-white'
-                  }`}
-                >
-                  {challengeMode ? 'Desactivar' : 'Activar'}
                 </button>
               </div>
             </div>
@@ -255,7 +221,7 @@ export default function Home() {
       )}
 
 
-      <main className="relative p-10 sm:pt-25 pt-5">
+      <main id="contenido-principal" tabIndex={-1} className="relative p-10 sm:pt-25 pt-5">
         <div className="flex flex-col items-center max-w-[1200px] mx-auto p-8 relative z-10">
           <section className="flex flex-col md:flex-row items-center justify-between w-full mt-8 relative">
             <header className="flex-col pr-0 md:pr-8 mb-12 md:mb-0 relative z-[2] text-center md:text-left">
@@ -266,18 +232,20 @@ export default function Home() {
               <h1 className="text-4xl md:text-6xl whitespace-nowrap lg:text-7xl font-bold mb-6 text-[#2c3e50] leading-tight relative">
                 ingeniero<br />de <span className="text-[#0067B8] relative inline-block">software</span>
               </h1>
-              <button 
+              <button
+                type="button"
                 onClick={handleWhoAmIClick}
+                aria-controls="video-presentacion"
+                aria-expanded={showVideo}
                 disabled={showVideo && !videoEnded}
-                className={`inline-block py-3 px-8 ${
-                  showVideo && !videoEnded 
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-gradient-to-r from-[#3498db] to-[#4fa3e0] hover:-translate-y-[5px] hover:shadow-[0_8px_25px_rgba(52,152,219,0.5)]'
-                } text-white rounded-full no-underline font-medium transition-all duration-300 border-none cursor-pointer shadow-[0_5px_15px_rgba(52,152,219,0.4)] relative overflow-hidden group`}
+                className="inline-flex items-center justify-center py-3 px-8 bg-[#0b67b3] text-white rounded-full no-underline font-medium transition-all duration-300 border-none cursor-pointer shadow-[0_5px_15px_rgba(52,152,219,0.4)] relative overflow-hidden group hover:bg-[#095799] hover:-translate-y-[5px] hover:shadow-[0_8px_25px_rgba(52,152,219,0.5)] disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-[0_5px_15px_rgba(52,152,219,0.4)]"
               >
-                ¿quién soy?
+                <span className="relative z-10">¿quién soy?</span>
                 {!(showVideo && !videoEnded) && (
-                  <span className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-500 group-hover:left-[100%]" />
+                  <span
+                    aria-hidden="true"
+                    className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-500 group-hover:left-[100%]"
+                  />
                 )}
               </button>
             </header>
@@ -296,7 +264,7 @@ export default function Home() {
                 <div className="w-full h-full relative">
                   <Image
                     src="/prueba1.png"
-                    alt="Mi rostro"
+                    alt="Fotografía de Cristhian David"
                     layout="fill"
                     objectFit="cover"
                     className="w-full h-full"
@@ -307,28 +275,41 @@ export default function Home() {
               
               <figure className={`absolute inset-0 ${showVideo ? 'opacity-100' : 'opacity-0'}`}>
                 <video
+                  id="video-presentacion"
                   ref={videoRef}
                   className="w-full h-full object-cover"
                   playsInline
-                  controls={false}
+                  controls={showVideo}
                   preload="auto"
                   onContextMenu={(e) => e.preventDefault()}
                   muted={isMuted}
+                  aria-describedby="descripcion-video-presentacion"
                 >
                   <source src="/presentation-video.mp4" type="video/mp4" />
+                  <track
+                    kind="captions"
+                    srcLang="es"
+                    src="/presentation-video.es.vtt"
+                    label="Español"
+                    default
+                  />
                   Tu navegador no soporta el elemento de video.
                 </video>
+                <p id="descripcion-video-presentacion" className="sr-only">
+                  Video de presentación personal con subtítulos en español.
+                </p>
 
                 {showVideo && (
                   <button
+                    type="button"
                     onClick={toggleMute}
                     className="absolute bottom-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10"
                     aria-label={isMuted ? "Activar sonido" : "Silenciar"}
                   >
                     {isMuted ? (
-                      <FaVolumeMute className="text-lg" />
+                      <FaVolumeMute aria-hidden="true" className="text-lg" />
                     ) : (
-                      <FaVolumeUp className="text-lg" />
+                      <FaVolumeUp aria-hidden="true" className="text-lg" />
                     )}
                   </button>
                 )}
@@ -338,15 +319,16 @@ export default function Home() {
         </div>
       </main>
 
-<nav className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-30">
+<nav aria-label="Redes sociales" className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-30">
   <a 
     href="https://github.com/cristhianDavidOrbes" 
     target="_blank" 
     rel="noopener noreferrer"
     title="GitHub"
+    aria-label="Abrir perfil de GitHub en una pestana nueva"
     className="w-12 h-12 rounded-full bg-white border border-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] hover:bg-[#1f2937] hover:border-[#1f2937] group"
   >
-    <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#1f2937] group-hover:text-white" />
+    <FaGithub aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#1f2937] group-hover:text-white" />
   </a>
 
   <a 
@@ -354,9 +336,10 @@ export default function Home() {
     target="_blank" 
     rel="noopener noreferrer"
     title="Facebook"
+    aria-label="Abrir perfil de Facebook en una pestana nueva"
     className="w-12 h-12 rounded-full bg-white border border-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] hover:bg-[#1456B8] hover:border-[#1456B8] group"
   >
-    <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
+    <FaFacebookF aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
   </a>
 
   <a 
@@ -364,9 +347,10 @@ export default function Home() {
     target="_blank" 
     rel="noopener noreferrer"
     title="WhatsApp"
+    aria-label="Abrir chat de WhatsApp en una pestana nueva"
     className="w-12 h-12 rounded-full bg-white border border-slate-200 shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] hover:bg-[#0D7A40] hover:border-[#0D7A40] group"
   >
-    <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#0D7A40] group-hover:text-white" />
+    <FaWhatsapp aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#0D7A40] group-hover:text-white" />
   </a>
 </nav>
 
@@ -403,3 +387,4 @@ export default function Home() {
     </>
   );
 }
+

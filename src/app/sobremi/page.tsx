@@ -67,13 +67,16 @@ export default function Sobremi() {
       <section className="absolute w-[300px] h-[200px] rotate-[20deg] bg-[radial-gradient(circle,#444_3px,transparent_3px)] bg-[length:15px_15px] opacity-10 z-[-1] top-[100px] left-[-20px]"></section>
       <section className="absolute w-[300px] h-[200px] bg-[radial-gradient(circle,#444_3px,transparent_3px)] rounded-4xl bg-[length:15px_15px] opacity-10 z-[-1] top-[500] left-[70px] sm:left-100"></section>
 
-      <nav className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]">
+      <nav
+        aria-label="Navegacion principal"
+        className="flex justify-between w-full items-center p-4 px-8 bg-white/10 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.05)] sticky top-0 z-[100]"
+      >
         <Link href="/" className="text-2xl font-bold text-[#3498db] relative z-[1] no-underline">
           cris<span className="text-[#2c3e50] font-normal">Developer</span>
           <span className="absolute w-full h-2 bottom-[2px] left-0 bg-[rgba(52,152,219,0.2)] z-[-1]"></span>
         </Link>
         
-        <menu className="hidden lg:flex gap-2">
+        <ul className="hidden lg:flex gap-2" role="list">
           {['casa', 'sobre mi', 'Habilidades', 'Proyectos', 'Educacion', 'Testimonios', 'Contacto'].map((item) => {
             const path = item.toLowerCase().replace(/\s+/g, '');
             const href = path === 'casa' ? '/' : `/${path}`;
@@ -89,14 +92,17 @@ export default function Sobremi() {
               </li>
             );
           })}
-        </menu>
+        </ul>
         
-        <button 
+        <button
+          type="button"
           className="lg:hidden text-[#34495e] text-2xl z-[110]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Menú"
+          aria-label={mobileMenuOpen ? "Cerrar menu principal" : "Abrir menu principal"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="menu-movil-principal"
         >
-          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          {mobileMenuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
         </button>
       </nav>
 
@@ -107,14 +113,16 @@ export default function Sobremi() {
         ></aside>
       )}
 
-      <aside 
+      <aside
+        id="menu-movil-principal"
+        aria-label="Menu movil principal"
         ref={mobileMenuRef}
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg rounded-tl-4xl transform transition-transform duration-300 ease-in-out z-[110] lg:hidden ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <section className="pt-10 relative">
-          <menu className="w-64 bg-gray-200 h-0.5 absolute top-20"></menu>
+          <div className="w-64 bg-gray-200 h-0.5 absolute top-20" aria-hidden="true"></div>
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-[#3498db] pl-4 mb-4">cris<span className='text-[#2c3e50]'>Developer</span></h2>
           </section>
@@ -140,11 +148,11 @@ export default function Sobremi() {
         </section>
       </aside>
 
-      <figure className="fixed w-10 h-10 bg-white rounded-full flex justify-center items-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] top-23 left-4 z-[10]">
-        <FaInfoCircle className="text-[#3498db] text-2xl" />
+      <figure aria-hidden="true" className="fixed w-10 h-10 bg-white rounded-full flex justify-center items-center shadow-[0_3px_10px_rgba(0,0,0,0.1)] top-23 left-4 z-[10]">
+        <FaInfoCircle aria-hidden="true" className="text-[#3498db] text-2xl" />
       </figure>
 
-      <main className="relative pt-32 pb-16 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-7xl mx-auto">
+      <main id="contenido-principal" tabIndex={-1} className="relative pt-32 pb-16 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-7xl mx-auto">
         <section 
           ref={basketballRef}
           className={`${isMobileSticky ? 'fixed' : 'absolute'} adsolute xl:fixed md:adsolute top-40 right-0 z-[5] w-40 h-auto md:w-40 transition-all duration-300 ${isMobileSticky ? 'animate-fadeIn scale-90' : ''}`}
@@ -226,15 +234,16 @@ export default function Sobremi() {
         </article>
       </main>
 
-<nav className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-30">
+<nav aria-label="Redes sociales" className="fixed bottom-4 left-1/2 -translate-x-1/2 flex gap-5 z-[100] sm:left-30">
   <a 
     href="https://github.com/cristhianDavidOrbes" 
     target="_blank" 
     rel="noopener noreferrer"
     title="GitHub"
+    aria-label="Abrir perfil de GitHub en una pestana nueva"
     className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
   >
-    <FaGithub className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
+    <FaGithub aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#333] group-hover:text-white" />
     <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
   </a>
 
@@ -243,9 +252,10 @@ export default function Sobremi() {
     target="_blank" 
     rel="noopener noreferrer"
     title="Facebook"
+    aria-label="Abrir perfil de Facebook en una pestana nueva"
     className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
   >
-    <FaFacebookF className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
+    <FaFacebookF aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#3b5998] group-hover:text-white" />
     <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
   </a>
 
@@ -254,9 +264,10 @@ export default function Sobremi() {
     target="_blank" 
     rel="noopener noreferrer"
     title="WhatsApp"
+    aria-label="Abrir chat de WhatsApp en una pestana nueva"
     className="w-12 h-12 rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] transition-all duration-300 flex justify-center items-center relative overflow-hidden hover:-translate-y-[5px] hover:rotate-[5deg] hover:shadow-[0_8px_20px_rgba(52,152,219,0.3)] group"
   >
-    <FaWhatsapp className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
+    <FaWhatsapp aria-hidden="true" className="w-[22px] h-[22px] relative z-[1] transition-all duration-300 text-[#25d366] group-hover:text-white" />
     <span className="absolute w-full h-full bg-gradient-to-r from-[#3498db] to-[#4fa3e0] top-full left-0 transition-all duration-500 z-[-1] group-hover:top-0" />
   </a>
 </nav>
